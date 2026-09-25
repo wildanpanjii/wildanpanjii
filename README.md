@@ -2,26 +2,24 @@
 
 # About Wildan Panji Maulana
 
-- 💻 Sedang belajar **AI** dan **Competitive Programming**
-- 🌱 Saat ini sedang mempelajari **GOLANG, PYTHON, & C++**
+- 💻 Interested in **AI** & **Competitive Programming**
+- 🌱 Currently Studying **GOLANG, PYTHON, & C++**
 - 🚀 Trying **Hackathon**
-- 📍 Berdomisili di **Bandung, Indonesia**
-- 📫 Insta **@wildanpanjii**
+- 📍 Bandung, Indonesia
+- 🎓 Telkom University
 
-## Teknologi yang Saya Gunakan
-
-### Bahasa Pemrograman
+### Languange Program
 
 ![Go](https://img.shields.io/badge/Go-%2300ADD8.svg?&logo=go&logoColor=white)
 ![C++](https://img.shields.io/badge/C++-%2300599C.svg?logo=c%2B%2B&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=fff)
 
-### Framework dan Tools
+### Framework & Tools
 
 ![Visual Studio](https://custom-icon-badges.demolab.com/badge/Visual%20Studio-5C2D91.svg?&logo=visualstudio&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=fff)
 
-## Terhubung dengan Saya
+## Contact Me
 
 [![LinkedIn](https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?logo=linkedin-white&logoColor=fff)](https://www.linkedin.com/in/wildanpanjii/)
 [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/wildanpanjii)
