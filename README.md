@@ -1,10 +1,6 @@
-# Halo, saya **Wildan Panji Maulana**       
+<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjU2b2plYzdtaXhxcnU1MWhxM2Y5amRnOTZyMjd1Nzd1dXM2MTd5biZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/fo824eF8RcaPSbenrG/giphy.gif" width="100%" alt="Header GIF" />
 
-<p align="center">
-  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjU2b2plYzdtaXhxcnU1MWhxM2Y5amRnOTZyMjd1Nzd1dXM2MTd5biZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/fo824eF8RcaPSbenrG/giphy.gif" alt="Profile views" />
-</p>
-
-## About Me
+# About Wildan Panji Maulana
 
 - 💻 Sedang belajar **AI** dan **Competitive Programming**
 - 🌱 Saat ini sedang mempelajari **GOLANG, PYTHON, & C++**
@@ -24,11 +20,6 @@
 
 ![Visual Studio](https://custom-icon-badges.demolab.com/badge/Visual%20Studio-5C2D91.svg?&logo=visualstudio&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=fff)
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=wildanpanjii&show_icons=true&theme=tokyonight" alt="GitHub Stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=wildanpanjii&layout=compact&theme=tokyonight" alt="Golang" />
-</p>
 
 ## Terhubung dengan Saya
 
