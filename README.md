@@ -1,6 +1,6 @@
-<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjU2b2plYzdtaXhxcnU1MWhxM2Y5amRnOTZyMjd1Nzd1dXM2MTd5biZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/fo824eF8RcaPSbenrG/giphy.gif" width="100%" alt="Header GIF" />
+<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3J2ZGl5dHlmdmQyOW0zZzVsa3Ztb2owY2R5cTZ1Z3l5ZDhreWdybSZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/wIOiGSVbkYwkDFXD5p/giphy.gif" width="100%" alt="Header GIF" />
 
-# About Wildan Panji Maulana
+# About **Wildan Panji Maulana**
 
 - 💻 Interested in **AI** & **Competitive Programming**
 - 🌱 Currently Studying **GOLANG, PYTHON, & C++**
