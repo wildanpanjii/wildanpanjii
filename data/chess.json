@@ -1,8 +1,13 @@
 {
   "game": 2,
   "level": "hard",
-  "moves": [],
-  "players": [],
+  "moves": [
+    "g1f3",
+    "g8f6"
+  ],
+  "players": [
+    "wildanpanjii"
+  ],
   "score": {
     "visitors": 0,
     "bot": 0,
