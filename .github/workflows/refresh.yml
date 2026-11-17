@@ -1,5 +1,5 @@
-# Redraws the data-driven art (title sequence, lead card, repo cards, galaxy, contribution city) from live GitHub data
-# and publishes it to the "output" branch as a single commit, so the daily refresh never adds commits to main.
+# Redraws the data-driven art (title sequence, lead card, repo cards, galaxy, contribution city) from live GitHub data,
+# plays a new Hard bot vs Hard bot chess game for the animated replay, and publishes it all to the "output" branch as a single commit, so the daily refresh never adds commits to main.
 # README.md on main is only committed when its text actually changes (for example a new repository card).
 name: Refresh profile art
 
@@ -40,7 +40,11 @@ jobs:
         run: |
           python tools/fetch_data.py "$GITHUB_REPOSITORY_OWNER" .cache
           python tools/gen_assets.py .cache . .art
-          mkdir -p .art/cache && cp .cache/profile.json .cache/avatar.jpg .art/cache/  # reused by the chess workflow
+
+      - name: Play today's bot vs bot chess game
+        env:
+          REPLAY_SECONDS: "3"
+        run: cd tools && python chess_replay.py ../.art
 
       - name: Publish art to the output branch
         env:

@@ -41,17 +41,11 @@
   <img src="https://streak-stats.demolab.com?user={{LOGIN}}&background=120C04&border=5A4213&stroke=5A4213&ring=F2C14E&fire=F2C14E&currStreakNum=F7ECD2&sideNums=F7ECD2&currStreakLabel=F2C14E&sideLabels=F2C14E&dates=B39A60&border_radius=14" height="165" alt="GitHub streak" />
 </p>
 
-<p align="center"><img src="./assets/div-intermission.svg" width="100%" alt="Intermission: play chess" /></p>
+<p align="center"><img src="./assets/div-intermission.svg" width="100%" alt="Intermission: bot vs bot" /></p>
 <p align="center">
-  <img src="./assets/{{CHESS_BOARD}}" width="460" alt="Current chess position" />
+  <img src="{{ART}}/chess-replay.svg" width="560" alt="Hard bot vs Hard bot: an animated replay of today's chess game" />
 </p>
-<p align="center">{{CHESS_STATUS}}</p>
-<p align="center">{{CHESS_LEVEL}}</p>
-<p align="center"><sub><b>How to play:</b> find your piece by its square (letters and numbers are on the board edges),<br />then click the square it should move to. <code>×</code> = capture, <code>+</code> = check. Press <b>Create</b> on the page that opens.</sub></p>
-
-{{CHESS_MOVES}}
-
-<p align="center"><sub>You play White, the bot answers as Black. The board redraws itself in about a minute. Scoreboard: {{CHESS_SCORE}}<br /><a href="{{CHESS_RESET}}">↺ New game</a> (profile owner only)</sub></p>
+<p align="center"><sub>Hard bot vs Hard bot. A fresh game is played every day from a random opening, sit back and watch.</sub></p>
 
 <p align="center"><img src="./assets/div-credits.svg" width="100%" alt="End credits" /></p>
 <p align="center">

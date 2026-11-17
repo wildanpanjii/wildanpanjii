@@ -3,7 +3,7 @@
 Usage: python gen_assets.py <cache_dir> <repo_root> <art_dir>
 
   <cache_dir>  profile.json + avatar.jpg written by fetch_data.py
-  <repo_root>  the profile repository: README.md, assets/ (dividers, chess board), data/chess.json
+  <repo_root>  the profile repository: README.md and assets/ (section dividers)
   <art_dir>    data-driven art (hero, lead, galaxy, city, repo cards); published on the "output" branch
 
 Optional: <repo_root>/assets/shots/<repo>.png|jpg replaces the illustrated thumbnail on that repo's card.
@@ -14,12 +14,8 @@ import json
 import math
 import random
 import sys
-import urllib.parse
+
 from pathlib import Path
-
-import chess
-
-from chess_game import DEFAULT_LEVEL, LEVELS  # single source for bot levels (tools/chess_game.py)
 
 cache, root, art = Path(sys.argv[1]), Path(sys.argv[2]), Path(sys.argv[3])
 assets = root / "assets"
@@ -428,152 +424,6 @@ def city():
 </svg>'''
 
 
-# ================================================================== 6. chess
-PIECES = {
-    "p": '<rect x="24" y="80" width="52" height="11" rx="4"/><path d="M33 80 C40 66 43 58 43 48 L57 48 C57 58 60 66 67 80 Z"/>'
-         '<rect x="35" y="43" width="30" height="7" rx="3.5"/><circle cx="50" cy="30" r="14"/>',
-    "r": '<rect x="24" y="80" width="52" height="11" rx="4"/><path d="M33 80 L36 40 L64 40 L67 80 Z"/>'
-         '<path d="M27 16 h11 v7 h7 v-7 h10 v7 h7 v-7 h11 v20 q0 4 -4 4 h-38 q-4 0 -4 -4 Z"/>',
-    "b": '<rect x="24" y="80" width="52" height="11" rx="4"/><path d="M34 80 C40 68 44 60 44 52 L56 52 C56 60 60 68 66 80 Z"/>'
-         '<rect x="35" y="46" width="30" height="7" rx="3.5"/><circle cx="50" cy="10" r="4.5"/>'
-         '<path d="M50 13 C61 23 65 33 60 46 L40 46 C35 33 39 23 50 13 Z"/><path d="M56 24 L48 35" fill="none" stroke-width="4" stroke-linecap="round"/>',
-    "n": '<rect x="24" y="80" width="52" height="11" rx="4"/>'
-         '<path d="M34 80 C34 64 40 56 47 48 L38 52 L28 46 L30 38 L44 22 L46 11 L55 20 C69 26 75 46 70 80 Z"/>'
-         '<circle cx="44" cy="31" r="1.6"/><path d="M58 27 C65 37 67 52 65 70" fill="none"/>',
-    "q": '<rect x="24" y="80" width="52" height="11" rx="4"/><path d="M30 80 L33 66 L67 66 L70 80 Z"/>'
-         '<path d="M31 66 L21 32 L34 50 L37 26 L45 48 L50 22 L55 48 L63 26 L66 50 L79 32 L69 66 Z"/>'
-         '<circle cx="21" cy="29" r="4.5"/><circle cx="37" cy="22" r="4.5"/><circle cx="50" cy="18" r="4.5"/><circle cx="63" cy="22" r="4.5"/><circle cx="79" cy="29" r="4.5"/>',
-    "k": '<rect x="24" y="80" width="52" height="11" rx="4"/><path d="M46 6 h8 v8 h8 v8 h-8 v14 h-8 v-14 h-8 v-8 h8 Z"/>'
-         '<path d="M33 80 C35 68 28 58 28 48 C28 36 42 32 50 42 C58 32 72 36 72 48 C72 58 65 68 67 80 Z"/>',
-}
-
-
-def chess_board(board):
-    sq, bx, by = 52, 54, 34
-    W, H = bx * 2 + sq * 8, by + sq * 8 + 50
-    last = board.peek() if board.move_stack else None
-    out = []
-    for rank in range(8):
-        for file in range(8):
-            x, y = bx + file * sq, by + (7 - rank) * sq
-            light = (rank + file) % 2 == 1
-            out.append(f'<rect x="{x}" y="{y}" width="{sq}" height="{sq}" fill="{"#d9b560" if light else "#6f4d15"}"/>')
-            s = chess.square(file, rank)
-            if last and s in (last.from_square, last.to_square):
-                out.append(f'<rect x="{x}" y="{y}" width="{sq}" height="{sq}" fill="#fff3a6" fill-opacity="0.42"/>')
-            if board.is_check() and board.king(board.turn) == s:
-                out.append(f'<rect x="{x}" y="{y}" width="{sq}" height="{sq}" fill="#ff5a3c" fill-opacity="0.5"/>')
-            piece = board.piece_at(s)
-            if piece:
-                fill, stroke = ("#fff8e2", "#2a1c05") if piece.color else ("#1d1406", "#f2c14e")
-                out.append(f'<use href="#pc-{piece.symbol().lower()}" transform="translate({x + 3} {y + 2.5}) scale(0.46)" '
-                           f'fill="{fill}" stroke="{stroke}" stroke-width="3" stroke-linejoin="round"/>')
-    coords = "".join(f'<text x="{bx + i * sq + sq / 2}" y="{by + sq * 8 + 24}" text-anchor="middle">{c}</text>' for i, c in enumerate("abcdefgh"))
-    coords += "".join(f'<text x="{bx - 22}" y="{by + (7 - i) * sq + sq / 2 + 4}" text-anchor="middle">{i + 1}</text>' for i in range(8))
-    defs = "".join(f'<g id="pc-{k}">{v}</g>' for k, v in PIECES.items())
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="Chess board, {"white" if board.turn else "black"} to move">
-<defs>{defs}
-  <linearGradient id="felt" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a290b"/><stop offset="1" stop-color="#0d0903"/></linearGradient>
-  <radialGradient id="glint" cx="85%" cy="88%" r="50%"><stop offset="0" stop-color="{GOLD}" stop-opacity="0.3"/><stop offset="1" stop-color="{GOLD}" stop-opacity="0"/></radialGradient>
-</defs>
-<rect x="1" y="1" width="{W - 2}" height="{H - 2}" rx="30" fill="url(#felt)"/>
-<rect x="1" y="1" width="{W - 2}" height="{H - 2}" rx="30" fill="url(#glint)" stroke="{GOLD}" stroke-opacity="0.55" stroke-width="1.5"/>
-<rect x="{bx - 34}" y="{by - 14}" width="{sq * 8 + 68}" height="{sq * 8 + 54}" rx="20" fill="none" stroke="{GOLD}" stroke-opacity="0.3"/>
-<rect x="{bx - 6}" y="{by - 6}" width="{sq * 8 + 12}" height="{sq * 8 + 12}" rx="8" fill="#241806" stroke="{GOLD}" stroke-opacity="0.6"/>
-{''.join(out)}
-<g font-family="{MONO}" font-size="12" font-weight="700" fill="{GOLD}">{coords}</g>
-</svg>'''
-
-
-def load_game():
-    path = root / "data" / "chess.json"
-    state = {"game": 1, "level": DEFAULT_LEVEL, "moves": [], "players": [],
-             "score": {"visitors": 0, "bot": 0, "draws": 0}, "last_result": ""}
-    if path.exists():
-        state.update(json.loads(path.read_text(encoding="utf-8")))
-    if state["level"] not in LEVELS:
-        state["level"] = DEFAULT_LEVEL
-    return state
-
-
-def chess_section():
-    """Board image + one issue link per legal move. Visitors play White, the bot (tools/chess_game.py) answers as Black."""
-    state = load_game()
-    board, sans = chess.Board(), []
-    for uci in state["moves"]:
-        sans.append(board.san(chess.Move.from_uci(uci)))
-        board.push_uci(uci)
-    ply = len(state["moves"])
-    board_file = f'chess-board-g{state["game"]}-p{ply}.svg'  # new name every move, so no stale cached image
-    for old in assets.glob("chess-board-*.svg"):
-        if old.name != board_file:
-            old.unlink()
-    save_static(board_file, chess_board(board))
-
-    # One row per piece that can move: "♙ Pawn e2 →" followed by a button for each square it can go to.
-    piece_name = {chess.PAWN: "♙ Pawn", chess.KNIGHT: "♘ Knight", chess.BISHOP: "♗ Bishop", chess.ROOK: "♖ Rook",
-                  chess.QUEEN: "♕ Queen", chess.KING: "♔ King"}
-    order = [chess.PAWN, chess.KNIGHT, chess.BISHOP, chess.ROOK, chess.QUEEN, chess.KING]
-    promo = {chess.QUEEN: "♕", chess.ROOK: "♖", chess.BISHOP: "♗", chess.KNIGHT: "♘"}
-    by_from = {}
-    for mv in board.legal_moves:
-        by_from.setdefault(mv.from_square, []).append(mv)
-    froms = sorted(by_from, key=lambda s: (order.index(board.piece_type_at(s)), chess.square_file(s), chess.square_rank(s)))
-
-    def label(mv):
-        san = board.san(mv)
-        if board.is_castling(mv):
-            text = f"{chess.square_name(mv.to_square)} castle"
-        else:
-            text = ("×" if board.is_capture(mv) else "") + chess.square_name(mv.to_square)
-        if mv.promotion:
-            text += " " + promo[mv.promotion]
-        return text + (" #" if san.endswith("#") else " +" if san.endswith("+") else "")
-
-    body = urllib.parse.quote('Just press "Create" below. The board redraws itself in about a minute.')
-    cells = []
-    for sq in froms:
-        moves = sorted(by_from[sq], key=lambda m: (chess.square_file(m.to_square), chess.square_rank(m.to_square),
-                                                   -(m.promotion or 0)))
-        links = []
-        for mv in moves:
-            title = urllib.parse.quote(f'chess|move|{mv.uci()}|{state["game"]}.{ply}')
-            links.append(f'<a href="https://github.com/{LOGIN}/{LOGIN}/issues/new?title={title}&body={body}"><kbd>{label(mv)}</kbd></a>')
-        cells.append(f'<td align="right">{piece_name[board.piece_type_at(sq)]} on <b>{chess.square_name(sq)}</b> →</td>'
-                     f'<td>{" ".join(links)}</td>')
-    if len(cells) % 2:
-        cells.append("<td></td><td></td>")
-    head = '<tr><th align="right">Piece</th><th align="left">Move to</th><th align="right">Piece</th><th align="left">Move to</th></tr>'
-    rows = [head] + ["<tr>" + cells[i] + cells[i + 1] + "</tr>" for i in range(0, len(cells), 2)]
-    table = '<table align="center">\n  ' + "\n  ".join(rows) + "\n</table>"
-
-    level = LEVELS[state["level"]]
-    status = (f"<b>Your move, White</b> · vs <b>{level['label']}</b> bot · game {state['game']} · "
-              f"move {board.fullmove_number}")
-    if ply >= 2:
-        who = state["players"][-1] if state["players"] else "a visitor"
-        status += f" · last: <code>{sans[-2]}</code> by @{esc(who)}, bot replied <code>{sans[-1]}</code>"
-    elif state["last_result"]:
-        status += f" · previous game: {esc(state['last_result'])}"
-
-    if ply == 0:  # level can only change before the first move
-        picks = []
-        for key, cfg in LEVELS.items():
-            title = urllib.parse.quote(f"chess|level|{key}|{state['game']}")
-            body = urllib.parse.quote(f'Just press "Create" below to play against the {cfg["label"]} bot.')
-            text = f"● {cfg['label']}" if key == state["level"] else cfg["label"]
-            picks.append(f'<a href="https://github.com/{LOGIN}/{LOGIN}/issues/new?title={title}&body={body}"><kbd>{text}</kbd></a>')
-        level_line = (f'<b>Bot level:</b> {" ".join(picks)}<br /><sub>Choose before the first move. '
-                      + " · ".join(f"{c['label']}: {c['about']}" for c in LEVELS.values()) + "</sub>")
-    else:
-        level_line = f"<sub>Bot level: <b>{level['label']}</b> ({level['about']}), locked until this game ends.</sub>"
-    sc = state["score"]
-    score = f'Visitors {sc["visitors"]} · Bot {sc["bot"]} · Draws {sc["draws"]}'
-    reset_body = urllib.parse.quote("Starts a fresh board. Only works when opened by the profile owner.")
-    reset = f"https://github.com/{LOGIN}/{LOGIN}/issues/new?title={urllib.parse.quote('chess|newgame')}&body={reset_body}"
-    return board_file, status, table, score, reset, level_line
-
-
 # ================================================================== write everything
 ART_URL = f"https://raw.githubusercontent.com/{LOGIN}/{LOGIN}/output"
 save_art("hero.svg", hero())
@@ -581,7 +431,7 @@ save_art("lead.svg", lead())
 save_art("galaxy.svg", galaxy())
 save_art("city.svg", city())
 DIVIDERS = {"cast": "THE CAST", "showing": "NOW SHOWING", "universe": "THE UNIVERSE", "city": "THE CITY",
-            "boxoffice": "BOX OFFICE", "intermission": "INTERMISSION · PLAY CHESS", "credits": "END CREDITS"}
+            "boxoffice": "BOX OFFICE", "intermission": "INTERMISSION · BOT VS BOT", "credits": "END CREDITS"}
 for key, text in DIVIDERS.items():
     save_static(f"div-{key}.svg", divider(text))
 card_tags = []
@@ -589,12 +439,9 @@ for i, repo in enumerate(PROJECTS[:4], 1):
     fname = f"reel-{i:02d}.svg"
     save_art(fname, card(i, repo))
     card_tags.append(f'<a href="{repo["url"]}"><img src="{ART_URL}/{fname}" width="49%" alt="{esc(repo["name"])}" /></a>')
-board_file, status, moves, score, reset_link, level_line = chess_section()
 
 template = (Path(__file__).parent / "README.template.md").read_text(encoding="utf-8")
 readme = (template.replace("{{LOGIN}}", LOGIN).replace("{{NAME}}", esc(NAME)).replace("{{ART}}", ART_URL)
-          .replace("{{CARDS}}", "\n  ".join(card_tags)).replace("{{CHESS_BOARD}}", board_file)
-          .replace("{{CHESS_STATUS}}", status).replace("{{CHESS_MOVES}}", moves).replace("{{CHESS_SCORE}}", score)
-          .replace("{{CHESS_RESET}}", reset_link).replace("{{CHESS_LEVEL}}", level_line))
+          .replace("{{CARDS}}", "\n  ".join(card_tags)))
 (root / "README.md").write_text(readme, encoding="utf-8", newline="\n")
-print(f"ok: {TOTAL} contributions, {len(PROJECTS)} project cards, board {board_file}")
+print(f"ok: {TOTAL} contributions, {len(PROJECTS)} project cards")
