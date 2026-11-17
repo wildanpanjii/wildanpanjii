@@ -60,7 +60,7 @@
   <tr><td align="right">♔ King on <b>e1</b> →</td><td><a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Ce1e2%7C1.2&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>e2</kbd></a></td><td></td><td></td></tr>
 </table>
 
-<p align="center"><sub>You play White, the bot answers as Black. The board redraws itself in about a minute. Scoreboard: Visitors 0 · Bot 0 · Draws 0</sub></p>
+<p align="center"><sub>You play White, the bot answers as Black. The board redraws itself in about a minute. Scoreboard: Visitors 0 · Bot 0 · Draws 0<br /><a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cnewgame&body=Starts%20a%20fresh%20board.%20Only%20works%20when%20opened%20by%20the%20profile%20owner.">↺ New game</a> (profile owner only)</sub></p>
 
 <p align="center"><img src="./assets/div-credits.svg" width="100%" alt="End credits" /></p>
 <p align="center">

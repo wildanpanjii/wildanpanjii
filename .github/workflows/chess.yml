@@ -1,5 +1,6 @@
 # A visitor clicks a move in README.md -> GitHub opens a pre-filled issue -> this workflow plays it,
 # lets the bot answer, redraws the board, commits as the profile owner, then replies to and closes the issue.
+# The "New game" link (title chess|newgame) only resets the board when the profile owner opened the issue.
 name: Chess move
 
 on:
@@ -16,7 +17,7 @@ concurrency:
 
 jobs:
   move:
-    if: startsWith(github.event.issue.title, 'chess|move|')
+    if: startsWith(github.event.issue.title, 'chess|')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

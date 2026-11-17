@@ -50,7 +50,7 @@
 
 {{CHESS_MOVES}}
 
-<p align="center"><sub>You play White, the bot answers as Black. The board redraws itself in about a minute. Scoreboard: {{CHESS_SCORE}}</sub></p>
+<p align="center"><sub>You play White, the bot answers as Black. The board redraws itself in about a minute. Scoreboard: {{CHESS_SCORE}}<br /><a href="{{CHESS_RESET}}">↺ New game</a> (profile owner only)</sub></p>
 
 <p align="center"><img src="./assets/div-credits.svg" width="100%" alt="End credits" /></p>
 <p align="center">

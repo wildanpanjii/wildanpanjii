@@ -550,7 +550,9 @@ def chess_section():
         status += f" · previous game: {esc(state['last_result'])}"
     sc = state["score"]
     score = f'Visitors {sc["visitors"]} · Bot {sc["bot"]} · Draws {sc["draws"]}'
-    return board_file, status, table, score
+    reset_body = urllib.parse.quote("Starts a fresh board. Only works when opened by the profile owner.")
+    reset = f"https://github.com/{LOGIN}/{LOGIN}/issues/new?title={urllib.parse.quote('chess|newgame')}&body={reset_body}"
+    return board_file, status, table, score, reset
 
 
 # ================================================================== write everything
@@ -568,11 +570,12 @@ for i, repo in enumerate(PROJECTS[:4], 1):
     fname = f"reel-{i:02d}.svg"
     save_art(fname, card(i, repo))
     card_tags.append(f'<a href="{repo["url"]}"><img src="{ART_URL}/{fname}" width="49%" alt="{esc(repo["name"])}" /></a>')
-board_file, status, moves, score = chess_section()
+board_file, status, moves, score, reset_link = chess_section()
 
 template = (Path(__file__).parent / "README.template.md").read_text(encoding="utf-8")
 readme = (template.replace("{{LOGIN}}", LOGIN).replace("{{NAME}}", esc(NAME)).replace("{{ART}}", ART_URL)
           .replace("{{CARDS}}", "\n  ".join(card_tags)).replace("{{CHESS_BOARD}}", board_file)
-          .replace("{{CHESS_STATUS}}", status).replace("{{CHESS_MOVES}}", moves).replace("{{CHESS_SCORE}}", score))
+          .replace("{{CHESS_STATUS}}", status).replace("{{CHESS_MOVES}}", moves).replace("{{CHESS_SCORE}}", score)
+          .replace("{{CHESS_RESET}}", reset_link))
 (root / "README.md").write_text(readme, encoding="utf-8", newline="\n")
 print(f"ok: {TOTAL} contributions, {len(PROJECTS)} project cards, board {board_file}")

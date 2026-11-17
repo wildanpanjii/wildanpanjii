@@ -3,6 +3,7 @@
 Usage: python chess_game.py "<issue title>" <github login> <reply.md>
 
 Issue titles look like  chess|move|e2e4|<game>.<ply>  (written by the links in README.md).
+The title  chess|newgame  starts a fresh board, but only when the issue was opened by the profile owner.
 Writes `changed=true|false` and `summary=...` to $GITHUB_OUTPUT when that variable is set.
 """
 import json
@@ -138,8 +139,30 @@ def finish(state, board):
     return f"\n\n**Game over: {text}.** A new game has started, so the next White move is yours to make."
 
 
+def save(state):
+    STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    STATE_FILE.write_text(json.dumps(state, indent=2) + "\n", encoding="utf-8", newline="\n")
+
+
+def new_game(player):
+    """Owner-only reset: abandon the current game (not counted in the score) and start a fresh board."""
+    if player.lower() != OWNER.lower():
+        return False, (f"Only @{OWNER} can start a new game. You can still "
+                       f"[play a move on the current board]({BOARD_LINK})."), ""
+    state = load()
+    if not state["moves"]:
+        return False, f"The board is already at the starting position. [Make the first move]({BOARD_LINK}).", ""
+    old = state["game"]
+    state.update(game=old + 1, moves=[], players=[], last_result=f"game {old} was reset by @{OWNER}")
+    save(state)
+    return True, (f"Game {old} was reset and is not counted in the score. Game {old + 1} starts from the beginning. "
+                  f"[Make the first move]({BOARD_LINK})."), f"Chess: start game {old + 1}"
+
+
 def play(title, player):
     """Returns (changed, reply_markdown, summary)."""
+    if title.strip() == "chess|newgame":
+        return new_game(player)
     parts = title.strip().split("|")
     if len(parts) != 4 or parts[0] != "chess" or parts[1] != "move":
         return False, "This issue title is not a chess move, so nothing was played.", ""
@@ -150,8 +173,9 @@ def play(title, player):
         board.push_uci(m)
     current = f"{state['game']}.{len(state['moves'])}"
     if stamp != current:
-        return False, (f"Someone moved before you, so this link was for an older position. "
-                       f"[Pick a move on the current board]({BOARD_LINK})."), ""
+        why = ("This link was for an earlier game." if stamp.split(".")[0] != str(state["game"])
+               else "Someone moved before you, so this link was for an older position.")
+        return False, f"{why} [Pick a move on the current board]({BOARD_LINK}).", ""
     try:
         move = chess.Move.from_uci(uci)
     except ValueError:
@@ -176,8 +200,7 @@ def play(title, player):
         summary += f", bot replies {bot}"
         ended = finish(state, board)
     reply += ended + f"\n\nThanks for playing! [See the board]({BOARD_LINK})."
-    STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
-    STATE_FILE.write_text(json.dumps(state, indent=2) + "\n", encoding="utf-8", newline="\n")
+    save(state)
     return True, reply, summary
 
 
