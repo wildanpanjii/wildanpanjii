@@ -257,11 +257,9 @@ def render(game, number, day):
 <text x="{W / 2}" y="38" text-anchor="middle" font-family="{MONO}" font-size="11" letter-spacing="4" fill="{GOLD}">GAME #{number} · {day:%d %b %Y}</text>
 <text x="{W / 2}" y="60" text-anchor="middle" font-family="{SANS}" font-size="14" fill="{MUTED}">{game["opening"]}</text>
 <g transform="translate({BX} 24) scale(0.3)" fill="#fff8e2" stroke="#2a1c05" stroke-width="5"><use href="#pc-k"/></g>
-<text x="{BX + 36}" y="40" font-family="{SANS}" font-size="14" font-weight="700" fill="{CREAM}">Hard bot</text>
-<text x="{BX + 36}" y="58" font-family="{MONO}" font-size="11" fill="{MUTED}">WHITE</text>
+<text x="{BX + 36}" y="44" font-family="{MONO}" font-size="11" letter-spacing="2" fill="{MUTED}">WHITE</text>
 <g transform="translate({W - BX - 30} 24) scale(0.3)" fill="#1d1406" stroke="{GOLD}" stroke-width="5"><use href="#pc-k"/></g>
-<text x="{W - BX - 36}" y="40" text-anchor="end" font-family="{SANS}" font-size="14" font-weight="700" fill="{CREAM}">Hard bot</text>
-<text x="{W - BX - 36}" y="58" text-anchor="end" font-family="{MONO}" font-size="11" fill="{MUTED}">BLACK</text>
+<text x="{W - BX - 36}" y="44" text-anchor="end" font-family="{MONO}" font-size="11" letter-spacing="2" fill="{MUTED}">BLACK</text>
 <rect x="{BX - 6}" y="{BY - 6}" width="{SQ * 8 + 12}" height="{SQ * 8 + 12}" rx="8" fill="#241806" stroke="{GOLD}" stroke-opacity="0.6"/>
 {"".join(squares)}
 <rect id="hf" class="h" width="{SQ}" height="{SQ}" fill="#fff3a6" fill-opacity="0.35" style="transform:translate(-200px,-200px)"/>

@@ -45,7 +45,6 @@
 <p align="center">
   <img src="{{ART}}/chess-replay.svg" width="560" alt="Hard bot vs Hard bot: an animated replay of today's chess game" />
 </p>
-<p align="center"><sub>Hard bot vs Hard bot. A fresh game is played every day from a random opening, sit back and watch.</sub></p>
 
 <p align="center"><img src="./assets/div-credits.svg" width="100%" alt="End credits" /></p>
 <p align="center">
