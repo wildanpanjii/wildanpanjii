@@ -19,6 +19,8 @@ from pathlib import Path
 
 import chess
 
+from chess_game import DEFAULT_LEVEL, LEVELS  # single source for bot levels (tools/chess_game.py)
+
 cache, root, art = Path(sys.argv[1]), Path(sys.argv[2]), Path(sys.argv[3])
 assets = root / "assets"
 assets.mkdir(parents=True, exist_ok=True)
@@ -485,9 +487,12 @@ def chess_board(board):
 
 def load_game():
     path = root / "data" / "chess.json"
-    state = {"game": 1, "moves": [], "players": [], "score": {"visitors": 0, "bot": 0, "draws": 0}, "last_result": ""}
+    state = {"game": 1, "level": DEFAULT_LEVEL, "moves": [], "players": [],
+             "score": {"visitors": 0, "bot": 0, "draws": 0}, "last_result": ""}
     if path.exists():
         state.update(json.loads(path.read_text(encoding="utf-8")))
+    if state["level"] not in LEVELS:
+        state["level"] = DEFAULT_LEVEL
     return state
 
 
@@ -542,17 +547,31 @@ def chess_section():
     rows = [head] + ["<tr>" + cells[i] + cells[i + 1] + "</tr>" for i in range(0, len(cells), 2)]
     table = '<table align="center">\n  ' + "\n  ".join(rows) + "\n</table>"
 
-    status = f"<b>Your move, White</b> · game {state['game']} · move {board.fullmove_number}"
+    level = LEVELS[state["level"]]
+    status = (f"<b>Your move, White</b> · vs <b>{level['label']}</b> bot · game {state['game']} · "
+              f"move {board.fullmove_number}")
     if ply >= 2:
         who = state["players"][-1] if state["players"] else "a visitor"
         status += f" · last: <code>{sans[-2]}</code> by @{esc(who)}, bot replied <code>{sans[-1]}</code>"
     elif state["last_result"]:
         status += f" · previous game: {esc(state['last_result'])}"
+
+    if ply == 0:  # level can only change before the first move
+        picks = []
+        for key, cfg in LEVELS.items():
+            title = urllib.parse.quote(f"chess|level|{key}|{state['game']}")
+            body = urllib.parse.quote(f'Just press "Create" below to play against the {cfg["label"]} bot.')
+            text = f"● {cfg['label']}" if key == state["level"] else cfg["label"]
+            picks.append(f'<a href="https://github.com/{LOGIN}/{LOGIN}/issues/new?title={title}&body={body}"><kbd>{text}</kbd></a>')
+        level_line = (f'<b>Bot level:</b> {" ".join(picks)}<br /><sub>Choose before the first move. '
+                      + " · ".join(f"{c['label']}: {c['about']}" for c in LEVELS.values()) + "</sub>")
+    else:
+        level_line = f"<sub>Bot level: <b>{level['label']}</b> ({level['about']}), locked until this game ends.</sub>"
     sc = state["score"]
     score = f'Visitors {sc["visitors"]} · Bot {sc["bot"]} · Draws {sc["draws"]}'
     reset_body = urllib.parse.quote("Starts a fresh board. Only works when opened by the profile owner.")
     reset = f"https://github.com/{LOGIN}/{LOGIN}/issues/new?title={urllib.parse.quote('chess|newgame')}&body={reset_body}"
-    return board_file, status, table, score, reset
+    return board_file, status, table, score, reset, level_line
 
 
 # ================================================================== write everything
@@ -570,12 +589,12 @@ for i, repo in enumerate(PROJECTS[:4], 1):
     fname = f"reel-{i:02d}.svg"
     save_art(fname, card(i, repo))
     card_tags.append(f'<a href="{repo["url"]}"><img src="{ART_URL}/{fname}" width="49%" alt="{esc(repo["name"])}" /></a>')
-board_file, status, moves, score, reset_link = chess_section()
+board_file, status, moves, score, reset_link, level_line = chess_section()
 
 template = (Path(__file__).parent / "README.template.md").read_text(encoding="utf-8")
 readme = (template.replace("{{LOGIN}}", LOGIN).replace("{{NAME}}", esc(NAME)).replace("{{ART}}", ART_URL)
           .replace("{{CARDS}}", "\n  ".join(card_tags)).replace("{{CHESS_BOARD}}", board_file)
           .replace("{{CHESS_STATUS}}", status).replace("{{CHESS_MOVES}}", moves).replace("{{CHESS_SCORE}}", score)
-          .replace("{{CHESS_RESET}}", reset_link))
+          .replace("{{CHESS_RESET}}", reset_link).replace("{{CHESS_LEVEL}}", level_line))
 (root / "README.md").write_text(readme, encoding="utf-8", newline="\n")
 print(f"ok: {TOTAL} contributions, {len(PROJECTS)} project cards, board {board_file}")

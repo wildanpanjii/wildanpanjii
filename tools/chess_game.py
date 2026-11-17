@@ -4,12 +4,14 @@ Usage: python chess_game.py "<issue title>" <github login> <reply.md>
 
 Issue titles look like  chess|move|e2e4|<game>.<ply>  (written by the links in README.md).
 The title  chess|newgame  starts a fresh board, but only when the issue was opened by the profile owner.
+The title  chess|level|<easy|medium|hard>|<game>  sets the bot level; anyone may, but only before the first move.
 Writes `changed=true|false` and `summary=...` to $GITHUB_OUTPUT when that variable is set.
 """
 import json
 import os
 import random
 import sys
+import time
 from pathlib import Path
 
 import chess
@@ -64,7 +66,23 @@ def ordered(board, moves):
     return sorted(moves, key=key)
 
 
+class OutOfTime(Exception):
+    pass
+
+
+_deadline = None  # set while a timed (Hard) search runs
+_nodes = 0
+
+
+def tick():
+    global _nodes
+    _nodes += 1
+    if _deadline is not None and _nodes % 1024 == 0 and time.monotonic() > _deadline:
+        raise OutOfTime
+
+
 def quiesce(board, alpha, beta, depth=4):
+    tick()
     stand = evaluate(board)
     if stand >= beta or depth == 0:
         return stand
@@ -80,6 +98,7 @@ def quiesce(board, alpha, beta, depth=4):
 
 
 def negamax(board, depth, alpha, beta):
+    tick()
     if board.is_checkmate():
         return -MATE - depth
     if board.is_stalemate() or board.is_insufficient_material() or board.can_claim_draw():
@@ -98,22 +117,68 @@ def negamax(board, depth, alpha, beta):
     return best
 
 
-def bot_move(board, depth=3):
-    scored = []
-    for m in ordered(board, list(board.legal_moves)):
+LEVELS = {
+    # depth: plies searched; slack: how many centipawns worse than the best move the bot may still pick
+    "easy": {"label": "Easy", "depth": 1, "slack": 200, "about": "beginner, often picks weaker moves"},
+    "medium": {"label": "Medium", "depth": 3, "slack": 12, "about": "casual, looks three moves ahead"},
+    "hard": {"label": "Hard", "depth": 6, "slack": 0, "seconds": 20, "about": "thinks as deep as it can in about 20 seconds"},
+}
+DEFAULT_LEVEL = "medium"
+
+
+def root_scores(board, moves, depth, narrow):
+    """Score each root move. narrow=True uses an alpha-beta window: faster, but only the best score is exact."""
+    scored, alpha = [], -MATE * 2
+    for m in moves:
         board.push(m)
-        scored.append((-negamax(board, depth - 1, -MATE * 2, MATE * 2), m))
+        s = -negamax(board, depth - 1, -MATE * 2, -alpha if narrow else MATE * 2)
         board.pop()
-    best = max(s for s, _ in scored)
-    return random.choice([m for s, m in scored if s >= best - 12])  # small variety between equal moves
+        scored.append((s, m))
+        if narrow:
+            alpha = max(alpha, s)
+    return scored
+
+
+def bot_move(board, level=DEFAULT_LEVEL):
+    global _deadline
+    cfg = LEVELS.get(level, LEVELS[DEFAULT_LEVEL])
+    moves = ordered(board, list(board.legal_moves))
+    if "seconds" not in cfg:
+        scored = root_scores(board.copy(), moves, cfg["depth"], narrow=False)
+        best = max(s for s, _ in scored)
+        return random.choice([m for s, m in scored if s >= best - cfg["slack"]])
+
+    # Hard: iterative deepening until the time budget runs out; keep the last fully searched depth.
+    _deadline = time.monotonic() + cfg["seconds"]
+    best_move = moves[0]
+    try:
+        for depth in range(1, cfg["depth"] + 1):
+            scored = root_scores(board.copy(), moves, depth, narrow=True)  # a copy, so an abort leaves board intact
+            top = max(s for s, _ in scored)
+            best_move = next(m for s, m in scored if s == top)
+            moves = [best_move] + [m for m in moves if m != best_move]  # search the best line first next time
+            if abs(top) >= MATE:
+                break
+    except OutOfTime:
+        pass
+    finally:
+        _deadline = None
+    return best_move
 
 
 # ------------------------------------------------------------------ game flow
 def load():
-    state = {"game": 1, "moves": [], "players": [], "score": {"visitors": 0, "bot": 0, "draws": 0}, "last_result": ""}
+    state = {"game": 1, "level": DEFAULT_LEVEL, "moves": [], "players": [],
+             "score": {"visitors": 0, "bot": 0, "draws": 0}, "last_result": ""}
     if STATE_FILE.exists():
         state.update(json.loads(STATE_FILE.read_text(encoding="utf-8")))
+    if state["level"] not in LEVELS:
+        state["level"] = DEFAULT_LEVEL
     return state
+
+
+def label(state):
+    return LEVELS[state["level"]]["label"]
 
 
 def result_text(board, outcome):
@@ -135,7 +200,8 @@ def finish(state, board):
     else:
         state["score"]["bot"] += 1
     text = result_text(board, outcome)
-    state.update(game=state["game"] + 1, moves=[], players=[], last_result=f"game {state['game']}: {text}")
+    state.update(game=state["game"] + 1, moves=[], players=[],
+                 last_result=f"game {state['game']} vs {label(state)} bot: {text}")
     return f"\n\n**Game over: {text}.** A new game has started, so the next White move is yours to make."
 
 
@@ -159,11 +225,31 @@ def new_game(player):
                   f"[Make the first move]({BOARD_LINK})."), f"Chess: start game {old + 1}"
 
 
+def set_level(name, stamp):
+    """Anyone may pick the bot level, but only before the first move of a game."""
+    state = load()
+    if name not in LEVELS:
+        return False, f"`{name}` is not a bot level. Pick Easy, Medium or Hard [on the board]({BOARD_LINK}).", ""
+    if stamp != str(state["game"]):
+        return False, f"This link was for an earlier game. [Pick a level on the current board]({BOARD_LINK}).", ""
+    if state["moves"]:
+        return False, (f"Game {state['game']} has already started against the {label(state)} bot, so its level is locked "
+                       f"until the game ends. [Play on]({BOARD_LINK})."), ""
+    if state["level"] == name:
+        return False, f"The bot is already on {label(state)}. [Make the first move]({BOARD_LINK}).", ""
+    state["level"] = name
+    save(state)
+    return True, (f"Bot level set to **{label(state)}** ({LEVELS[name]['about']}). "
+                  f"[Make the first move]({BOARD_LINK})."), f"Chess: bot level {label(state)} for game {state['game']}"
+
+
 def play(title, player):
     """Returns (changed, reply_markdown, summary)."""
     if title.strip() == "chess|newgame":
         return new_game(player)
     parts = title.strip().split("|")
+    if len(parts) == 4 and parts[0] == "chess" and parts[1] == "level":
+        return set_level(parts[2].strip().lower(), parts[3].strip())
     if len(parts) != 4 or parts[0] != "chess" or parts[1] != "move":
         return False, "This issue title is not a chess move, so nothing was played.", ""
     uci, stamp = parts[2].strip(), parts[3].strip()
@@ -190,14 +276,15 @@ def play(title, player):
     reply = f"You played **{you}**."
     summary = f"Chess: @{player} plays {you}"
 
+    level = label(state)
     ended = finish(state, board)
     if not ended:
-        reply_move = bot_move(board)
+        reply_move = bot_move(board, state["level"])
         bot = board.san(reply_move)
         board.push(reply_move)
         state["moves"].append(reply_move.uci())
-        reply += f" The bot answered **{bot}**."
-        summary += f", bot replies {bot}"
+        reply += f" The {level} bot answered **{bot}**."
+        summary += f", {level} bot replies {bot}"
         ended = finish(state, board)
     reply += ended + f"\n\nThanks for playing! [See the board]({BOARD_LINK})."
     save(state)

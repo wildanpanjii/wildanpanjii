@@ -46,7 +46,8 @@
 <p align="center">
   <img src="./assets/chess-board-g1-p2.svg" width="460" alt="Current chess position" />
 </p>
-<p align="center"><b>Your move, White</b> · game 1 · move 2 · last: <code>e4</code> by @wildanpanjii, bot replied <code>d5</code></p>
+<p align="center"><b>Your move, White</b> · vs <b>Medium</b> bot · game 1 · move 2 · last: <code>e4</code> by @wildanpanjii, bot replied <code>d5</code></p>
+<p align="center"><sub>Bot level: <b>Medium</b> (casual, looks three moves ahead), locked until this game ends.</sub></p>
 <p align="center"><sub><b>How to play:</b> find your piece by its square (letters and numbers are on the board edges),<br />then click the square it should move to. <code>×</code> = capture, <code>+</code> = check. Press <b>Create</b> on the page that opens.</sub></p>
 
 <table align="center">

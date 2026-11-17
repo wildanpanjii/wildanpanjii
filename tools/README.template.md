@@ -46,6 +46,7 @@
   <img src="./assets/{{CHESS_BOARD}}" width="460" alt="Current chess position" />
 </p>
 <p align="center">{{CHESS_STATUS}}</p>
+<p align="center">{{CHESS_LEVEL}}</p>
 <p align="center"><sub><b>How to play:</b> find your piece by its square (letters and numbers are on the board edges),<br />then click the square it should move to. <code>×</code> = capture, <code>+</code> = check. Press <b>Create</b> on the page that opens.</sub></p>
 
 {{CHESS_MOVES}}
