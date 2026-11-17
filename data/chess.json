@@ -1,16 +1,12 @@
 {
-  "game": 1,
-  "moves": [
-    "e2e4",
-    "d7d5"
-  ],
-  "players": [
-    "wildanpanjii"
-  ],
+  "game": 2,
+  "level": "medium",
+  "moves": [],
+  "players": [],
   "score": {
     "visitors": 0,
     "bot": 0,
     "draws": 0
   },
-  "last_result": ""
+  "last_result": "game 1 was reset by @wildanpanjii"
 }
