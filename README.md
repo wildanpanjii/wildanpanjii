@@ -1,49 +1,63 @@
 <p align="center">
-  <img src="./assets/hero.svg" width="100%" alt="Wildan Panji Maulana, @wildanpanjii" />
-</p>
-
-<p align="center">
-  <img src="./assets/system-scan.svg" width="100%" alt="Profile scan: Bandung, Telkom University, AI and Competitive Programming" />
-</p>
-
-### `$ ls ./skills`
-
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=go,cpp,py,ts,js,html,css,postgres,git,vscode&theme=dark" alt="Go, C++, Python, TypeScript, JavaScript, HTML, CSS, PostgreSQL, Git, VS Code" />
-</p>
-
-### `$ ls ./projects`
-
-<p align="center">
-  <a href="https://github.com/wildanpanjii/Uang-Papi"><img src="./assets/project-uang-papi.svg" width="49%" alt="Uang-Papi" /></a>
-  <a href="https://github.com/wildanpanjii/TubesKursusInAlpro2"><img src="./assets/project-tubes-alpro2.svg" width="49%" alt="TubesKursusInAlpro2" /></a>
-</p>
-
-### `$ git log --graph`
-
-<p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=wildanpanjii&bg_color=050a05&color=b6ffb0&line=39ff14&point=b6ffb0&area=true&area_color=39ff14&title_color=39ff14&hide_border=false&border_color=1f6f1f&radius=12&custom_title=contribution.rhythm" width="100%" alt="Contribution activity graph" />
-</p>
-
-### `$ ./stats --all`
-
-<p align="center">
-  <img src="https://github-stats-extended.vercel.app/api?username=wildanpanjii&show_icons=true&include_all_commits=true&count_private=true&bg_color=050a05&title_color=39ff14&text_color=b6ffb0&icon_color=39ff14&border_color=1f6f1f&border_radius=12" height="170" alt="GitHub stats" />
-  <img src="https://github-stats-extended.vercel.app/api/top-langs/?username=wildanpanjii&layout=compact&bg_color=050a05&title_color=39ff14&text_color=b6ffb0&border_color=1f6f1f&border_radius=12" height="170" alt="Top languages" />
+  <img src="https://raw.githubusercontent.com/wildanpanjii/wildanpanjii/output/hero.svg" width="100%" alt="GitHub Pictures presents Wildan Panji" />
 </p>
 <p align="center">
-  <img src="https://streak-stats.demolab.com?user=wildanpanjii&background=050A05&border=1F6F1F&stroke=1F6F1F&ring=39FF14&fire=39FF14&currStreakNum=B6FFB0&sideNums=B6FFB0&currStreakLabel=39FF14&sideLabels=39FF14&dates=6FA86F&border_radius=12" height="170" alt="GitHub streak" />
+  <img src="https://raw.githubusercontent.com/wildanpanjii/wildanpanjii/output/lead.svg" width="100%" alt="The lead: Wildan Panji, @wildanpanjii" />
 </p>
 
-### `$ ./contact --open`
-
-<p align="left">
-  <a href="https://www.linkedin.com/in/wildanpanjii/"><img src="https://custom-icon-badges.demolab.com/badge/LinkedIn-050a05?style=for-the-badge&logo=linkedin-white&logoColor=39ff14" alt="LinkedIn" /></a>
-  <a href="https://instagram.com/wildanpanjii"><img src="https://img.shields.io/badge/Instagram-050a05?style=for-the-badge&logo=instagram&logoColor=39ff14" alt="Instagram" /></a>
-  <a href="mailto:wilpm2.id@gmail.com"><img src="https://img.shields.io/badge/Gmail-050a05?style=for-the-badge&logo=gmail&logoColor=39ff14" alt="Gmail" /></a>
-  <a href="https://discord.com/users/570829862642909184"><img src="https://img.shields.io/badge/Discord-050a05?style=for-the-badge&logo=discord&logoColor=39ff14" alt="Discord" /></a>
-</p>
-
+<p align="center"><img src="./assets/div-cast.svg" width="100%" alt="The cast" /></p>
 <p align="center">
-  <sub><code>&gt; EOF · thanks for scanning · wildanpanjii</code></sub>
+  <img src="https://img.shields.io/badge/Go-120c04?style=for-the-badge&logo=go&logoColor=f2c14e" alt="Go" />
+  <img src="https://img.shields.io/badge/C++-120c04?style=for-the-badge&logo=cplusplus&logoColor=f2c14e" alt="C++" />
+  <img src="https://img.shields.io/badge/Python-120c04?style=for-the-badge&logo=python&logoColor=f2c14e" alt="Python" />
+  <img src="https://img.shields.io/badge/TypeScript-120c04?style=for-the-badge&logo=typescript&logoColor=f2c14e" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/JavaScript-120c04?style=for-the-badge&logo=javascript&logoColor=f2c14e" alt="JavaScript" />
+  <br />
+  <img src="https://img.shields.io/badge/HTML-120c04?style=for-the-badge&logo=html5&logoColor=f2c14e" alt="HTML" />
+  <img src="https://img.shields.io/badge/CSS-120c04?style=for-the-badge&logo=css&logoColor=f2c14e" alt="CSS" />
+  <img src="https://img.shields.io/badge/PostgreSQL-120c04?style=for-the-badge&logo=postgresql&logoColor=f2c14e" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/Git-120c04?style=for-the-badge&logo=git&logoColor=f2c14e" alt="Git" />
+  <img src="https://custom-icon-badges.demolab.com/badge/VS%20Code-120c04?style=for-the-badge&logo=vsc&logoColor=f2c14e" alt="VS Code" />
 </p>
+
+<p align="center"><img src="./assets/div-showing.svg" width="100%" alt="Now showing" /></p>
+<p align="center">
+  <a href="https://github.com/wildanpanjii/TubesKursusInAlpro2"><img src="https://raw.githubusercontent.com/wildanpanjii/wildanpanjii/output/reel-01.svg" width="49%" alt="TubesKursusInAlpro2" /></a>
+  <a href="https://github.com/wildanpanjii/Uang-Papi"><img src="https://raw.githubusercontent.com/wildanpanjii/wildanpanjii/output/reel-02.svg" width="49%" alt="Uang-Papi" /></a>
+</p>
+
+<p align="center"><img src="./assets/div-universe.svg" width="100%" alt="The universe" /></p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/wildanpanjii/wildanpanjii/output/galaxy.svg" width="100%" alt="Repo galaxy: every star is a repository" />
+</p>
+
+<p align="center"><img src="./assets/div-city.svg" width="100%" alt="The city" /></p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/wildanpanjii/wildanpanjii/output/city.svg" width="100%" alt="Contribution city: one building per day of the last year" />
+</p>
+
+<p align="center"><img src="./assets/div-boxoffice.svg" width="100%" alt="Box office" /></p>
+<p align="center">
+  <img src="https://github-stats-extended.vercel.app/api?username=wildanpanjii&show_icons=true&include_all_commits=true&bg_color=120c04&title_color=f2c14e&text_color=f7ecd2&icon_color=f2c14e&ring_color=f2c14e&border_color=5a4213&border_radius=14" height="165" alt="GitHub stats" />
+  <img src="https://streak-stats.demolab.com?user=wildanpanjii&background=120C04&border=5A4213&stroke=5A4213&ring=F2C14E&fire=F2C14E&currStreakNum=F7ECD2&sideNums=F7ECD2&currStreakLabel=F2C14E&sideLabels=F2C14E&dates=B39A60&border_radius=14" height="165" alt="GitHub streak" />
+</p>
+
+<p align="center"><img src="./assets/div-intermission.svg" width="100%" alt="Intermission: play chess" /></p>
+<p align="center">
+  <img src="./assets/chess-board-g1-p0.svg" width="460" alt="Current chess position" />
+</p>
+<p align="center"><b>Your move, White</b> · game 1 · move 1</p>
+<p align="center">
+  <b>♙ Pawn</b>&nbsp; <a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Ca2a3%7C1.0&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>a3</kbd></a> <a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Ca2a4%7C1.0&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>a4</kbd></a> <a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Cb2b3%7C1.0&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>b3</kbd></a> <a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Cb2b4%7C1.0&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>b4</kbd></a> <a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Cc2c3%7C1.0&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>c3</kbd></a> <a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Cc2c4%7C1.0&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>c4</kbd></a> <a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Cd2d3%7C1.0&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>d3</kbd></a> <a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Cd2d4%7C1.0&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>d4</kbd></a> <a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Ce2e3%7C1.0&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>e3</kbd></a> <a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Ce2e4%7C1.0&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>e4</kbd></a> <a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Cf2f3%7C1.0&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>f3</kbd></a> <a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Cf2f4%7C1.0&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>f4</kbd></a> <a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Cg2g3%7C1.0&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>g3</kbd></a> <a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Cg2g4%7C1.0&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>g4</kbd></a> <a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Ch2h3%7C1.0&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>h3</kbd></a> <a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Ch2h4%7C1.0&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>h4</kbd></a><br />
+  <b>♘ Knight</b>&nbsp; <a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Cb1a3%7C1.0&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>Na3</kbd></a> <a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Cb1c3%7C1.0&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>Nc3</kbd></a> <a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Cg1f3%7C1.0&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>Nf3</kbd></a> <a href="https://github.com/wildanpanjii/wildanpanjii/issues/new?title=chess%7Cmove%7Cg1h3%7C1.0&body=Just%20press%20%22Create%22%20below.%20The%20board%20redraws%20itself%20in%20about%20a%20minute."><kbd>Nh3</kbd></a>
+</p>
+<p align="center"><sub>You play White, the bot answers as Black. Pick a move, then press <b>Create</b> on the page that opens.<br />The board redraws itself in about a minute. Scoreboard: Visitors 0 · Bot 0 · Draws 0</sub></p>
+
+<p align="center"><img src="./assets/div-credits.svg" width="100%" alt="End credits" /></p>
+<p align="center">
+  <a href="https://www.linkedin.com/in/wildanpanjii/"><img src="https://custom-icon-badges.demolab.com/badge/LinkedIn-120c04?style=for-the-badge&logo=linkedin-white&logoColor=f2c14e" alt="LinkedIn" /></a>
+  <a href="https://instagram.com/wildanpanjii"><img src="https://img.shields.io/badge/Instagram-120c04?style=for-the-badge&logo=instagram&logoColor=f2c14e" alt="Instagram" /></a>
+  <a href="mailto:wilpm2.id@gmail.com"><img src="https://img.shields.io/badge/Gmail-120c04?style=for-the-badge&logo=gmail&logoColor=f2c14e" alt="Gmail" /></a>
+  <a href="https://discord.com/users/570829862642909184"><img src="https://img.shields.io/badge/Discord-120c04?style=for-the-badge&logo=discord&logoColor=f2c14e" alt="Discord" /></a>
+</p>
+<p align="center"><sub>THE END · thanks for watching</sub></p>

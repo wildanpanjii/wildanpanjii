@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="44" viewBox="0 0 900 44" role="img" aria-label="THE UNIVERSE">
+<defs><linearGradient id="l" x1="0" x2="1"><stop offset="0" stop-color="#f2c14e" stop-opacity="0"/><stop offset="1" stop-color="#f2c14e" stop-opacity="0.75"/></linearGradient>
+<linearGradient id="r" x1="1" x2="0"><stop offset="0" stop-color="#f2c14e" stop-opacity="0"/><stop offset="1" stop-color="#f2c14e" stop-opacity="0.75"/></linearGradient></defs>
+<rect x="40" y="21.5" width="304" height="1" fill="url(#l)"/>
+<rect x="556" y="21.5" width="304" height="1" fill="url(#r)"/>
+<path d="M352 22 l5 -5 l5 5 l-5 5 Z M538 22 l5 -5 l5 5 l-5 5 Z" fill="#f2c14e"/>
+<text x="453" y="26.5" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12.5" letter-spacing="6" fill="#f2c14e">THE UNIVERSE</text>
+</svg>

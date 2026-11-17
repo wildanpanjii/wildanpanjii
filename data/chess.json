@@ -1,0 +1,11 @@
+{
+  "game": 1,
+  "moves": [],
+  "players": [],
+  "score": {
+    "visitors": 0,
+    "bot": 0,
+    "draws": 0
+  },
+  "last_result": ""
+}
