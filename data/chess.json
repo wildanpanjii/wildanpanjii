@@ -1,8 +1,13 @@
 {
   "game": 3,
   "level": "easy",
-  "moves": [],
-  "players": [],
+  "moves": [
+    "g1f3",
+    "b7b5"
+  ],
+  "players": [
+    "wildanpanjii"
+  ],
   "score": {
     "visitors": 0,
     "bot": 0,
