@@ -1,7 +1,12 @@
 {
   "game": 1,
-  "moves": [],
-  "players": [],
+  "moves": [
+    "e2e4",
+    "d7d5"
+  ],
+  "players": [
+    "wildanpanjii"
+  ],
   "score": {
     "visitors": 0,
     "bot": 0,
