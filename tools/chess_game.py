@@ -121,7 +121,7 @@ LEVELS = {
     # depth: plies searched; slack: how many centipawns worse than the best move the bot may still pick
     "easy": {"label": "Easy", "depth": 1, "slack": 200, "about": "beginner, often picks weaker moves"},
     "medium": {"label": "Medium", "depth": 3, "slack": 12, "about": "casual, looks three moves ahead"},
-    "hard": {"label": "Hard", "depth": 6, "slack": 0, "seconds": 20, "about": "thinks as deep as it can in about 20 seconds"},
+    "hard": {"label": "Hard", "depth": 6, "slack": 0, "seconds": 10, "about": "thinks as deep as it can in about 10 seconds"},
 }
 DEFAULT_LEVEL = "medium"
 
