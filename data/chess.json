@@ -3,9 +3,12 @@
   "level": "easy",
   "moves": [
     "g1f3",
-    "b7b5"
+    "b7b5",
+    "b2b3",
+    "h7h5"
   ],
   "players": [
+    "wildanpanjii",
     "wildanpanjii"
   ],
   "score": {
