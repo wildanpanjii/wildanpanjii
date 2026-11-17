@@ -32,11 +32,11 @@ DESCRIPTIONS = {
 }
 CAMPUS = "Telkom University"
 
-# ------------------------------------------------------------------ palette (from the title-sequence look)
-INK, INK2, UMBER = "#070503", "#120c04", "#2c1d06"
-GOLD_HI, GOLD, GOLD_MID, GOLD_DK, BRONZE = "#fff0c2", "#f2c14e", "#d6a033", "#8f6417", "#5c3f0e"
-CREAM, MUTED, LINE = "#f7ecd2", "#b39a60", "#5a4213"
-LANG_TINT = ["#ffd766", "#ff9f43", "#fff3d0", "#b9812a", "#e8c27a", "#8f6417"]  # in-palette language colours
+# ------------------------------------------------------------------ palette (avatar blue on GitHub dark; names kept from the gold theme)
+INK, INK2, UMBER = "#010409", "#0d1117", "#161b22"
+GOLD_HI, GOLD, GOLD_MID, GOLD_DK, BRONZE = "#cbe5f6", "#56b6ea", "#25a1e4", "#2c6fa3", "#1f2b3a"
+CREAM, MUTED, LINE = "#e6edf3", "#8d96a0", "#30363d"
+LANG_TINT = ["#4fb3e8", "#3fc1c9", "#f2d2b4", "#7aa2d6", "#a5dcf7", "#2c6fa3"]  # in-palette language colours
 LANG_ABBR = {"TypeScript": "TS", "JavaScript": "JS", "Go": "GO", "Python": "PY", "C++": "C+", "HTML": "H5", "CSS": "CS"}
 
 DISPLAY = "'Arial Black', 'Segoe UI Black', 'Helvetica Neue', Impact, Arial, sans-serif"
@@ -85,8 +85,8 @@ def save_static(name, svg):
 
 
 GOLD_TEXT_GRAD = f'''<linearGradient id="goldText" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0" stop-color="#fff5cf"/><stop offset="0.45" stop-color="#f7cb58"/>
-  <stop offset="0.56" stop-color="#e2aa30"/><stop offset="1" stop-color="#c0871b"/></linearGradient>'''
+  <stop offset="0" stop-color="#d6ebf8"/><stop offset="0.45" stop-color="#63bcec"/>
+  <stop offset="0.56" stop-color="#2da5e5"/><stop offset="1" stop-color="#1887c3"/></linearGradient>'''
 
 
 # ================================================================== 1. title sequence
@@ -103,11 +103,11 @@ def hero():
                     f'font-weight="900" letter-spacing="1">{esc(text)}</text>')
         out = []
         for i in range(9, 0, -1):
-            shade = "#3d2a08" if i > 6 else "#5d410d" if i > 3 else "#7d5912"
+            shade = "#17202b" if i > 6 else "#1f2b3a" if i > 3 else "#10587f"
             out.append(f'<text x="{450 + i * 0.9:.1f}" y="{y + i * 0.9:.1f}" text-anchor="middle" font-family="{DISPLAY}" '
                        f'font-size="{size}" font-weight="900" letter-spacing="1" fill="{shade}">{esc(text)}</text>')
         out.append(f'<text x="450" y="{y}" text-anchor="middle" font-family="{DISPLAY}" font-size="{size}" font-weight="900" '
-                   f'letter-spacing="1" fill="url(#goldText)" stroke="#fff8dd" stroke-opacity="0.35" stroke-width="0.7">{esc(text)}</text>')
+                   f'letter-spacing="1" fill="url(#goldText)" stroke="#e1f0fa" stroke-opacity="0.35" stroke-width="0.7">{esc(text)}</text>')
         return "".join(out)
 
     top2 = " · ".join(k.upper() for k, _ in LANGS[:2])
@@ -145,7 +145,7 @@ def hero():
   <clipPath id="frame"><rect width="{W}" height="{H}" rx="16"/></clipPath>
   <clipPath id="tclip">{title(line1, y1, True)}{title(line2, y2, True) if line2 else ""}</clipPath>
   <radialGradient id="warm" cx="50%" cy="46%" r="62%">
-    <stop offset="0" stop-color="#3b2707"/><stop offset="0.55" stop-color="#1a1104"/><stop offset="1" stop-color="{INK}"/>
+    <stop offset="0" stop-color="#143252"/><stop offset="0.55" stop-color="#121a26"/><stop offset="1" stop-color="{INK}"/>
   </radialGradient>
   <radialGradient id="vig" cx="50%" cy="50%" r="72%">
     <stop offset="0.6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.7"/>
@@ -192,7 +192,7 @@ def lead():
 </style>
 <defs>
   <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#33230a"/><stop offset="0.55" stop-color="#1a1205"/><stop offset="1" stop-color="#0b0803"/>
+    <stop offset="0" stop-color="#16263a"/><stop offset="0.55" stop-color="#161b22"/><stop offset="1" stop-color="#0d1117"/>
   </linearGradient>
   <radialGradient id="halo" cx="50%" cy="50%" r="50%">
     <stop offset="0.55" stop-color="{GOLD}" stop-opacity="0.35"/><stop offset="1" stop-color="{GOLD}" stop-opacity="0"/>
@@ -235,9 +235,9 @@ def thumb(repo, x, y, w, h):
                     f'<image href="{uri}" x="{x}" y="{y}" width="{w}" height="{h}" preserveAspectRatio="xMidYMin slice" clip-path="url(#tc)"/>'
                     f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="8" fill="none" stroke="{GOLD}" stroke-opacity="0.35"/>')
     rnd = random.Random(repo["name"])
-    body = [f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="8" fill="#0b0803" stroke="{GOLD}" stroke-opacity="0.35"/>',
-            f'<rect x="{x}" y="{y}" width="{w}" height="14" rx="8" fill="#241806"/>',
-            f'<rect x="{x}" y="{y + 8}" width="{w}" height="6" fill="#241806"/>',
+    body = [f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="8" fill="#0d1117" stroke="{GOLD}" stroke-opacity="0.35"/>',
+            f'<rect x="{x}" y="{y}" width="{w}" height="14" rx="8" fill="#161b22"/>',
+            f'<rect x="{x}" y="{y + 8}" width="{w}" height="6" fill="#161b22"/>',
             "".join(f'<circle cx="{x + 9 + i * 8}" cy="{y + 7}" r="2.2" fill="{GOLD}" fill-opacity="{0.9 - i * 0.25}"/>' for i in range(3))]
     if repo["language"] in ("Go", "C", "C++", "Python", "Rust", "Shell"):  # terminal-ish placeholder
         for i in range(5):
@@ -265,7 +265,7 @@ def card(idx, repo):
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="{esc(repo["name"])}: {esc(" ".join(desc))}">
 <defs>
   <linearGradient id="aq" x1="0" y1="0" x2="0.9" y2="1">
-    <stop offset="0" stop-color="#5a400f"/><stop offset="0.5" stop-color="#33230a"/><stop offset="1" stop-color="#150e04"/>
+    <stop offset="0" stop-color="#1b3a5c"/><stop offset="0.5" stop-color="#16263a"/><stop offset="1" stop-color="#10161e"/>
   </linearGradient>
   <radialGradient id="lamp" cx="82%" cy="12%" r="60%">
     <stop offset="0" stop-color="{GOLD}" stop-opacity="0.28"/><stop offset="1" stop-color="{GOLD}" stop-opacity="0"/>
@@ -314,7 +314,7 @@ def galaxy():
         dust.append(f'<circle cx="{r * math.cos(th):.1f}" cy="{r * math.sin(th):.1f}" r="{rnd.uniform(0.5, 1.3):.1f}" '
                     f'fill="{GOLD_HI}" fill-opacity="{rnd.uniform(0.1, 0.4):.2f}"/>')
     for _ in range(60):  # core
-        dust.append(f'<circle cx="{rnd.gauss(0, 15):.1f}" cy="{rnd.gauss(0, 15):.1f}" r="{rnd.uniform(0.8, 2):.1f}" fill="#fff6d8" fill-opacity="{rnd.uniform(0.4, 0.9):.2f}"/>')
+        dust.append(f'<circle cx="{rnd.gauss(0, 15):.1f}" cy="{rnd.gauss(0, 15):.1f}" r="{rnd.uniform(0.8, 2):.1f}" fill="#deeff9" fill-opacity="{rnd.uniform(0.4, 0.9):.2f}"/>')
 
     def project(r, th):
         x, y = r * math.cos(th), r * math.sin(th) * squash
@@ -335,7 +335,7 @@ def galaxy():
         stars.append(
             f'<circle cx="{sx:.1f}" cy="{sy:.1f}" r="{rad * 3.2:.1f}" fill="{col}" fill-opacity="0.1"/>'
             f'<circle class="pulse" style="animation-delay:-{i * 0.9:.1f}s" cx="{sx:.1f}" cy="{sy:.1f}" r="{rad * 1.9:.1f}" fill="{col}" fill-opacity="0.22"/>'
-            f'<circle cx="{sx:.1f}" cy="{sy:.1f}" r="{rad:.1f}" fill="{col}"/><circle cx="{sx:.1f}" cy="{sy:.1f}" r="{rad * 0.38:.1f}" fill="#fffdf2"/>'
+            f'<circle cx="{sx:.1f}" cy="{sy:.1f}" r="{rad:.1f}" fill="{col}"/><circle cx="{sx:.1f}" cy="{sy:.1f}" r="{rad * 0.38:.1f}" fill="#e1f0fa"/>'
             f'<text x="{tx:.1f}" y="{sy + 4:.1f}" text-anchor="{anchor}" font-family="{SANS}" font-size="12.5" font-weight="700" fill="{CREAM}" '
             f'stroke="{INK}" stroke-width="3" paint-order="stroke">{esc(r["name"])} <tspan fill="{GOLD}">★ {r["stars"]}</tspan></text>')
     legend = "".join(
@@ -353,8 +353,8 @@ def galaxy():
   @keyframes pulse {{ 50% {{ transform: scale(1.35); fill-opacity: 0.08; }} }}
 </style>
 <defs>
-  <linearGradient id="space" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1c1305"/><stop offset="0.6" stop-color="#0c0803"/><stop offset="1" stop-color="{INK}"/></linearGradient>
-  <radialGradient id="core" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffe9a8" stop-opacity="0.55"/><stop offset="0.4" stop-color="{GOLD}" stop-opacity="0.16"/><stop offset="1" stop-color="{GOLD}" stop-opacity="0"/></radialGradient>
+  <linearGradient id="space" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#121a26"/><stop offset="0.6" stop-color="#0c1116"/><stop offset="1" stop-color="{INK}"/></linearGradient>
+  <radialGradient id="core" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#b2def5" stop-opacity="0.55"/><stop offset="0.4" stop-color="{GOLD}" stop-opacity="0.16"/><stop offset="1" stop-color="{GOLD}" stop-opacity="0"/></radialGradient>
   <clipPath id="gframe"><rect x="1" y="1" width="{W - 2}" height="{H - 2}" rx="17"/></clipPath>
 </defs>
 <rect x="0.75" y="0.75" width="{W - 1.5}" height="{H - 1.5}" rx="18" fill="url(#space)" stroke="{GOLD_DK}" stroke-opacity="0.7"/>
@@ -381,9 +381,9 @@ def city():
     ai, bi = a * inset, b * inset
     first = min(DAYS)
     sunday = first - dt.timedelta(days=(first.weekday() + 1) % 7)
-    top_c = ["#241a09", "#a87a22", "#d6a033", "#f2c14e", "#fff0c2"]
-    left_c = ["#181105", "#7a5716", "#a67a22", "#c99632", "#e9cd84"]
-    right_c = ["#0f0b04", "#4f370c", "#6f4f12", "#8f6a1c", "#b89345"]
+    top_c = ["#1c2430", "#167db4", "#25a1e4", "#56b6ea", "#cbe5f6"]
+    left_c = ["#0f151c", "#105980", "#167bb2", "#1c9bdf", "#7ec7ef"]
+    right_c = ["#0d1218", "#1c2734", "#0e5073", "#136a98", "#1c9ce1"]
     cells = []
     for day, count in DAYS.items():
         off = (day - sunday).days
@@ -408,7 +408,7 @@ def city():
   @keyframes grow {{ from {{ transform: scaleY(0.04); }} to {{ transform: scaleY(1); }} }}
 </style>
 <defs>
-  <linearGradient id="dusk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a290b"/><stop offset="0.5" stop-color="#1c1305"/><stop offset="1" stop-color="#0a0703"/></linearGradient>
+  <linearGradient id="dusk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#17293d"/><stop offset="0.5" stop-color="#121a26"/><stop offset="1" stop-color="#0d1117"/></linearGradient>
   <radialGradient id="sun" cx="78%" cy="8%" r="65%"><stop offset="0" stop-color="{GOLD}" stop-opacity="0.22"/><stop offset="1" stop-color="{GOLD}" stop-opacity="0"/></radialGradient>
   {GOLD_TEXT_GRAD}
 </defs>

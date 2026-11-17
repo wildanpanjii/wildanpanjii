@@ -44,8 +44,8 @@ FIRST_DAY = dt.date(2026, 11, 17)
 # timing of the animation, in seconds
 INTRO, STEP, MOVE, OUTRO, FADE = 1.6, 1.1, 0.55, 5.0, 0.8
 
-# look (same gold palette as the rest of the profile)
-GOLD, CREAM, MUTED = "#f2c14e", "#f7ecd2", "#b39a60"
+# look (same avatar-blue palette as the rest of the profile)
+GOLD, CREAM, MUTED = "#56b6ea", "#e6edf3", "#8d96a0"
 MONO = "ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"
 SANS = "-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
 SQ, BX, BY = 56, 56, 92
@@ -67,7 +67,7 @@ PIECES = {
     "k": '<rect x="24" y="80" width="52" height="11" rx="4"/><path d="M46 6 h8 v8 h8 v8 h-8 v14 h-8 v-14 h-8 v-8 h8 Z"/>'
          '<path d="M33 80 C35 68 28 58 28 48 C28 36 42 32 50 42 C58 32 72 36 72 48 C72 58 65 68 67 80 Z"/>',
 }
-STYLE = {True: ('#fff8e2', '#2a1c05'), False: ('#1d1406', GOLD)}  # fill, stroke per colour
+STYLE = {True: ('#f0f6fc', '#0d1117'), False: ('#0d1117', GOLD)}  # fill, stroke per colour
 
 
 # ------------------------------------------------------------------ the game
@@ -233,7 +233,7 @@ def render(game, number, day):
     for rank in range(8):
         for file in range(8):
             x, y = BX + file * SQ, BY + (7 - rank) * SQ
-            squares.append(f'<rect x="{x}" y="{y}" width="{SQ}" height="{SQ}" fill="{"#d9b560" if (rank + file) % 2 else "#6f4d15"}"/>')
+            squares.append(f'<rect x="{x}" y="{y}" width="{SQ}" height="{SQ}" fill="{"#9cc3e0" if (rank + file) % 2 else "#2b4f6e"}"/>')
     coords = "".join(f'<text x="{BX + i * SQ + SQ / 2}" y="{BY + SQ * 8 + 22}" text-anchor="middle">{c}</text>' for i, c in enumerate("abcdefgh"))
     coords += "".join(f'<text x="{BX - 20}" y="{BY + (7 - i) * SQ + SQ / 2 + 4}" text-anchor="middle">{i + 1}</text>' for i in range(8))
     defs = "".join(f'<g id="pc-{k}">{v}</g>' for k, v in PIECES.items())
@@ -249,19 +249,19 @@ def render(game, number, day):
 {chr(10).join(css)}
 </style>
 <defs>{defs}
-  <linearGradient id="felt" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a290b"/><stop offset="1" stop-color="#0d0903"/></linearGradient>
+  <linearGradient id="felt" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#17293d"/><stop offset="1" stop-color="#0d1117"/></linearGradient>
   <radialGradient id="glint" cx="85%" cy="92%" r="55%"><stop offset="0" stop-color="{GOLD}" stop-opacity="0.28"/><stop offset="1" stop-color="{GOLD}" stop-opacity="0"/></radialGradient>
 </defs>
 <rect x="1" y="1" width="{W - 2}" height="{H - 2}" rx="30" fill="url(#felt)"/>
 <rect x="1" y="1" width="{W - 2}" height="{H - 2}" rx="30" fill="url(#glint)" stroke="{GOLD}" stroke-opacity="0.55" stroke-width="1.5"/>
 <text x="{W / 2}" y="38" text-anchor="middle" font-family="{MONO}" font-size="11" letter-spacing="4" fill="{GOLD}">GAME #{number} · {day:%d %b %Y}</text>
 <text x="{W / 2}" y="60" text-anchor="middle" font-family="{SANS}" font-size="14" fill="{MUTED}">{game["opening"]}</text>
-<g transform="translate({BX} 24) scale(0.3)" fill="#fff8e2" stroke="#2a1c05" stroke-width="5"><use href="#pc-k"/></g>
-<g transform="translate({W - BX - 30} 24) scale(0.3)" fill="#1d1406" stroke="{GOLD}" stroke-width="5"><use href="#pc-k"/></g>
-<rect x="{BX - 6}" y="{BY - 6}" width="{SQ * 8 + 12}" height="{SQ * 8 + 12}" rx="8" fill="#241806" stroke="{GOLD}" stroke-opacity="0.6"/>
+<g transform="translate({BX} 24) scale(0.3)" fill="#f0f6fc" stroke="#0d1117" stroke-width="5"><use href="#pc-k"/></g>
+<g transform="translate({W - BX - 30} 24) scale(0.3)" fill="#0d1117" stroke="{GOLD}" stroke-width="5"><use href="#pc-k"/></g>
+<rect x="{BX - 6}" y="{BY - 6}" width="{SQ * 8 + 12}" height="{SQ * 8 + 12}" rx="8" fill="#161b22" stroke="{GOLD}" stroke-opacity="0.6"/>
 {"".join(squares)}
-<rect id="hf" class="h" width="{SQ}" height="{SQ}" fill="#fff3a6" fill-opacity="0.35" style="transform:translate(-200px,-200px)"/>
-<rect id="ht" class="h" width="{SQ}" height="{SQ}" fill="#fff3a6" fill-opacity="0.5" style="transform:translate(-200px,-200px)"/>
+<rect id="hf" class="h" width="{SQ}" height="{SQ}" fill="#a5dcf7" fill-opacity="0.35" style="transform:translate(-200px,-200px)"/>
+<rect id="ht" class="h" width="{SQ}" height="{SQ}" fill="#a5dcf7" fill-opacity="0.5" style="transform:translate(-200px,-200px)"/>
 <rect id="ck" class="h" width="{SQ}" height="{SQ}" fill="#ff5a3c" fill-opacity="0.55" style="transform:translate(-200px,-200px)"/>
 {chr(10).join(body)}
 <g font-family="{MONO}" font-size="12" font-weight="700" fill="{GOLD}">{coords}</g>
@@ -270,11 +270,11 @@ def render(game, number, day):
 <rect id="bar" x="{BX}" y="{BY + SQ * 8 + 84}" width="{SQ * 8}" height="3" rx="1.5" fill="{GOLD}"/>
 <text x="{W / 2}" y="{H - 22}" text-anchor="middle" font-family="{MONO}" font-size="11" fill="{MUTED}">{n_moves} moves · a new game every day</text>
 <g id="res" opacity="0">
-  <rect x="{BX + 44}" y="{BY + SQ * 3}" width="{SQ * 8 - 88}" height="{SQ * 2}" rx="16" fill="#120c04" fill-opacity="0.92" stroke="{GOLD}" stroke-opacity="0.7"/>
+  <rect x="{BX + 44}" y="{BY + SQ * 3}" width="{SQ * 8 - 88}" height="{SQ * 2}" rx="16" fill="#0d1117" fill-opacity="0.92" stroke="{GOLD}" stroke-opacity="0.7"/>
   <text x="{W / 2}" y="{BY + SQ * 4 - 4}" text-anchor="middle" font-family="{SANS}" font-size="34" font-weight="800" fill="{GOLD}">{game["score"]}</text>
   <text x="{W / 2}" y="{BY + SQ * 4 + 28}" text-anchor="middle" font-family="{SANS}" font-size="16" fill="{CREAM}">{game["result"]}</text>
 </g>
-<rect id="cov" x="{BX - 6}" y="{BY - 6}" width="{SQ * 8 + 12}" height="{SQ * 8 + 100}" rx="8" fill="#120c04" opacity="0"/>
+<rect id="cov" x="{BX - 6}" y="{BY - 6}" width="{SQ * 8 + 12}" height="{SQ * 8 + 100}" rx="8" fill="#0d1117" opacity="0"/>
 </svg>'''
 
 
