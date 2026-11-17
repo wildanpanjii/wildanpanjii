@@ -505,21 +505,42 @@ def chess_section():
             old.unlink()
     save_static(board_file, chess_board(board))
 
-    glyph = {chess.PAWN: "♙ Pawn", chess.KNIGHT: "♘ Knight", chess.BISHOP: "♗ Bishop", chess.ROOK: "♖ Rook",
-             chess.QUEEN: "♕ Queen", chess.KING: "♔ King"}
-    groups = {}
-    for mv in sorted(board.legal_moves, key=lambda m: board.san(m)):
-        groups.setdefault(board.piece_type_at(mv.from_square), []).append(mv)
+    # One row per piece that can move: "♙ Pawn e2 →" followed by a button for each square it can go to.
+    piece_name = {chess.PAWN: "♙ Pawn", chess.KNIGHT: "♘ Knight", chess.BISHOP: "♗ Bishop", chess.ROOK: "♖ Rook",
+                  chess.QUEEN: "♕ Queen", chess.KING: "♔ King"}
+    order = [chess.PAWN, chess.KNIGHT, chess.BISHOP, chess.ROOK, chess.QUEEN, chess.KING]
+    promo = {chess.QUEEN: "♕", chess.ROOK: "♖", chess.BISHOP: "♗", chess.KNIGHT: "♘"}
+    by_from = {}
+    for mv in board.legal_moves:
+        by_from.setdefault(mv.from_square, []).append(mv)
+    froms = sorted(by_from, key=lambda s: (order.index(board.piece_type_at(s)), chess.square_file(s), chess.square_rank(s)))
+
+    def label(mv):
+        san = board.san(mv)
+        if board.is_castling(mv):
+            text = f"{chess.square_name(mv.to_square)} castle"
+        else:
+            text = ("×" if board.is_capture(mv) else "") + chess.square_name(mv.to_square)
+        if mv.promotion:
+            text += " " + promo[mv.promotion]
+        return text + (" #" if san.endswith("#") else " +" if san.endswith("+") else "")
+
     body = urllib.parse.quote('Just press "Create" below. The board redraws itself in about a minute.')
-    rows = []
-    for ptype in (chess.PAWN, chess.KNIGHT, chess.BISHOP, chess.ROOK, chess.QUEEN, chess.KING):
-        if ptype not in groups:
-            continue
+    cells = []
+    for sq in froms:
+        moves = sorted(by_from[sq], key=lambda m: (chess.square_file(m.to_square), chess.square_rank(m.to_square),
+                                                   -(m.promotion or 0)))
         links = []
-        for mv in groups[ptype]:
+        for mv in moves:
             title = urllib.parse.quote(f'chess|move|{mv.uci()}|{state["game"]}.{ply}')
-            links.append(f'<a href="https://github.com/{LOGIN}/{LOGIN}/issues/new?title={title}&body={body}"><kbd>{board.san(mv)}</kbd></a>')
-        rows.append(f"<b>{glyph[ptype]}</b>&nbsp; " + " ".join(links))
+            links.append(f'<a href="https://github.com/{LOGIN}/{LOGIN}/issues/new?title={title}&body={body}"><kbd>{label(mv)}</kbd></a>')
+        cells.append(f'<td align="right">{piece_name[board.piece_type_at(sq)]} on <b>{chess.square_name(sq)}</b> →</td>'
+                     f'<td>{" ".join(links)}</td>')
+    if len(cells) % 2:
+        cells.append("<td></td><td></td>")
+    head = '<tr><th align="right">Piece</th><th align="left">Move to</th><th align="right">Piece</th><th align="left">Move to</th></tr>'
+    rows = [head] + ["<tr>" + cells[i] + cells[i + 1] + "</tr>" for i in range(0, len(cells), 2)]
+    table = '<table align="center">\n  ' + "\n  ".join(rows) + "\n</table>"
 
     status = f"<b>Your move, White</b> · game {state['game']} · move {board.fullmove_number}"
     if ply >= 2:
@@ -529,7 +550,7 @@ def chess_section():
         status += f" · previous game: {esc(state['last_result'])}"
     sc = state["score"]
     score = f'Visitors {sc["visitors"]} · Bot {sc["bot"]} · Draws {sc["draws"]}'
-    return board_file, status, "<br />\n  ".join(rows), score
+    return board_file, status, table, score
 
 
 # ================================================================== write everything

@@ -46,10 +46,11 @@
   <img src="./assets/{{CHESS_BOARD}}" width="460" alt="Current chess position" />
 </p>
 <p align="center">{{CHESS_STATUS}}</p>
-<p align="center">
-  {{CHESS_MOVES}}
-</p>
-<p align="center"><sub>You play White, the bot answers as Black. Pick a move, then press <b>Create</b> on the page that opens.<br />The board redraws itself in about a minute. Scoreboard: {{CHESS_SCORE}}</sub></p>
+<p align="center"><sub><b>How to play:</b> find your piece by its square (letters and numbers are on the board edges),<br />then click the square it should move to. <code>×</code> = capture, <code>+</code> = check. Press <b>Create</b> on the page that opens.</sub></p>
+
+{{CHESS_MOVES}}
+
+<p align="center"><sub>You play White, the bot answers as Black. The board redraws itself in about a minute. Scoreboard: {{CHESS_SCORE}}</sub></p>
 
 <p align="center"><img src="./assets/div-credits.svg" width="100%" alt="End credits" /></p>
 <p align="center">
