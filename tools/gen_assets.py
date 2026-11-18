@@ -56,9 +56,32 @@ LANGS = sorted(LANG_BYTES.items(), key=lambda kv: -kv[1])
 LANG_TOTAL = sum(LANG_BYTES.values()) or 1
 LANG_COLOR = {k: LANG_TINT[min(i, len(LANG_TINT) - 1)] for i, (k, _) in enumerate(LANGS)}
 DAYS = {dt.date.fromisoformat(k): v for k, v in P["contributions"].items()}
+if not DAYS:  # no calendar from any source: draw an empty year instead of failing
+    _today = dt.date.today()
+    DAYS = {_today - dt.timedelta(days=i): 0 for i in range(364, -1, -1)}
 TOTAL = sum(DAYS.values())
 ACTIVE = sum(1 for v in DAYS.values() if v)
-BUSIEST = max(DAYS.values()) if DAYS else 0
+BUSIEST = max(DAYS.values())
+
+
+def streaks():
+    """(current streak, its first day, longest streak, its first day). Today may still be empty without breaking it."""
+    order = sorted(DAYS)
+    longest, longest_start, run = 0, None, 0
+    for i, d in enumerate(order):
+        run = run + 1 if DAYS[d] else 0
+        if run > longest:
+            longest, longest_start = run, order[i - run + 1]
+    i = len(order) - 1
+    if order and not DAYS[order[i]]:
+        i -= 1
+    current = 0
+    while i >= 0 and DAYS[order[i]]:
+        current, i = current + 1, i - 1
+    return current, (order[i + 1] if current else None), longest, longest_start
+
+
+STREAK, STREAK_START, LONGEST, LONGEST_START = streaks()
 
 
 def esc(s):
@@ -424,12 +447,61 @@ def city():
 </svg>'''
 
 
+# ================================================================== 6. box office (stats + streak, no third-party service)
+def boxoffice():
+    W, H = 900, 250
+    span = lambda a: f"{a:%d %b %Y}" if a else "—"
+    ring = 2 * math.pi * 58
+    share = 0 if not LONGEST else min(1, STREAK / LONGEST)
+    rows = [("Longest streak", f"{LONGEST} day{'s' if LONGEST != 1 else ''}"),
+            ("Busiest day", f"{BUSIEST} contribution{'s' if BUSIEST != 1 else ''}"),
+            ("Stars earned", f"{STARS}"),
+            ("Repositories", f"{P['public_repos']}"),
+            ("Followers", f"{P['followers']}")]
+    row_svg = "".join(
+        f'<text x="640" y="{70 + i * 30}" font-family="{SANS}" font-size="14" fill="{MUTED}">{esc(k)}</text>'
+        f'<text x="860" y="{70 + i * 30}" text-anchor="end" font-family="{MONO}" font-size="14" font-weight="700" fill="{CREAM}">{esc(v)}</text>'
+        for i, (k, v) in enumerate(rows))
+    since = f"{STREAK_START:%d %b} – today" if STREAK else "start one today"
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="Box office: {TOTAL} contributions in the last year, current streak {STREAK} days, longest streak {LONGEST} days">
+<style>
+  .arc {{ animation: arc 1.6s cubic-bezier(.2,.8,.2,1) both; }}
+  @keyframes arc {{ from {{ stroke-dashoffset: {ring:.1f}; }} }}
+  .up {{ animation: up .9s ease-out both; }}
+  @keyframes up {{ from {{ opacity: 0; transform: translateY(6px); }} }}
+</style>
+<defs>
+  {GOLD_TEXT_GRAD}
+  <linearGradient id="bo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16263a"/><stop offset="0.6" stop-color="#121a26"/><stop offset="1" stop-color="#0d1117"/></linearGradient>
+</defs>
+<rect x="0.75" y="0.75" width="{W - 1.5}" height="{H - 1.5}" rx="18" fill="url(#bo)" stroke="{GOLD_DK}" stroke-opacity="0.7"/>
+<line x1="300" y1="36" x2="300" y2="{H - 36}" stroke="{LINE}"/>
+<line x1="600" y1="36" x2="600" y2="{H - 36}" stroke="{LINE}"/>
+<g class="up">
+  <text x="40" y="58" font-family="{MONO}" font-size="11.5" letter-spacing="5" fill="{GOLD}">CONTRIBUTIONS</text>
+  <text x="38" y="128" font-family="{DISPLAY}" font-size="54" font-weight="900" fill="url(#goldText)">{TOTAL:,}</text>
+  <text x="40" y="156" font-family="{SANS}" font-size="15" font-weight="600" fill="{CREAM}">in the last year</text>
+  <text x="40" y="196" font-family="{SANS}" font-size="13" fill="{MUTED}">{ACTIVE} active days</text>
+  <text x="40" y="216" font-family="{MONO}" font-size="11" fill="{MUTED}">{span(min(DAYS))} – {span(max(DAYS))}</text>
+</g>
+<circle cx="450" cy="112" r="58" fill="none" stroke="{GOLD}" stroke-opacity="0.15" stroke-width="8"/>
+<circle class="arc" cx="450" cy="112" r="58" fill="none" stroke="{GOLD}" stroke-width="8" stroke-linecap="round"
+        stroke-dasharray="{ring:.1f}" stroke-dashoffset="{ring * (1 - share):.1f}" transform="rotate(-90 450 112)"/>
+<text x="450" y="124" text-anchor="middle" font-family="{DISPLAY}" font-size="36" font-weight="900" fill="{CREAM}">{STREAK}</text>
+<text x="450" y="204" text-anchor="middle" font-family="{MONO}" font-size="11.5" letter-spacing="4" fill="{GOLD}">CURRENT STREAK</text>
+<text x="450" y="224" text-anchor="middle" font-family="{SANS}" font-size="12.5" fill="{MUTED}">{esc(since)}</text>
+<text x="640" y="40" font-family="{MONO}" font-size="11.5" letter-spacing="5" fill="{GOLD}">RECORDS</text>
+<g class="up">{row_svg}</g>
+</svg>'''
+
+
 # ================================================================== write everything
 ART_URL = f"https://raw.githubusercontent.com/{LOGIN}/{LOGIN}/output"
 save_art("hero.svg", hero())
 save_art("lead.svg", lead())
 save_art("galaxy.svg", galaxy())
 save_art("city.svg", city())
+save_art("boxoffice.svg", boxoffice())
 DIVIDERS = {"cast": "THE CAST", "showing": "NOW SHOWING", "universe": "THE UNIVERSE", "city": "THE CITY",
             "boxoffice": "BOX OFFICE", "intermission": "INTERMISSION · BOT VS BOT", "credits": "END CREDITS"}
 for key, text in DIVIDERS.items():

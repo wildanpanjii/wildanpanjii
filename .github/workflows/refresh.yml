@@ -38,8 +38,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          python tools/fetch_data.py "$GITHUB_REPOSITORY_OWNER" .cache
+          # the last successful profile data is kept on the output branch as a fallback for the calendar
+          git fetch -q --depth=1 origin output && git show FETCH_HEAD:cache/profile.json > .last-good.json || true
+          python tools/fetch_data.py "$GITHUB_REPOSITORY_OWNER" .cache .last-good.json
           python tools/gen_assets.py .cache . .art
+          mkdir -p .art/cache
+          if python -c "import json,sys; sys.exit(0 if json.load(open('.cache/profile.json'))['contributions'] else 1)"; then
+            cp .cache/profile.json .art/cache/profile.json
+          elif [ -s .last-good.json ]; then
+            cp .last-good.json .art/cache/profile.json
+          fi
 
       - name: Play today's bot vs bot chess game
         env:

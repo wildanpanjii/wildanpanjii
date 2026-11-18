@@ -2,3 +2,4 @@
 .art/
 reply.md
 __pycache__/
+.last-good.json
