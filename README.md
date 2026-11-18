@@ -38,8 +38,7 @@
 
 <p align="center"><img src="./assets/div-boxoffice.svg" width="100%" alt="Box office" /></p>
 <p align="center">
-  <img src="https://github-stats-extended.vercel.app/api?username=wildanpanjii&show_icons=true&include_all_commits=true&bg_color=0d1117&title_color=56b6ea&text_color=e6edf3&icon_color=56b6ea&ring_color=56b6ea&border_color=30363d&border_radius=14" height="165" alt="GitHub stats" />
-  <img src="https://streak-stats.demolab.com?user=wildanpanjii&background=0d1117&border=30363d&stroke=30363d&ring=56b6ea&fire=56b6ea&currStreakNum=e6edf3&sideNums=e6edf3&currStreakLabel=56b6ea&sideLabels=56b6ea&dates=8d96a0&border_radius=14" height="165" alt="GitHub streak" />
+  <img src="https://raw.githubusercontent.com/wildanpanjii/wildanpanjii/output/boxoffice.svg" width="100%" alt="Box office: contributions, current and longest streak, and records" />
 </p>
 
 <p align="center"><img src="./assets/div-intermission.svg" width="100%" alt="Intermission: bot vs bot" /></p>
