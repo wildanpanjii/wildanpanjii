@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500" role="img" aria-label="GitHub Pictures presents Wildan Panji">
+<style>
+  .cap { opacity: 0; animation: fade 1.4s ease-out .2s forwards; }
+  .ttl { opacity: 0; animation: rise 1.5s cubic-bezier(.2,.7,.2,1) .8s forwards; }
+  .sub { opacity: 0; animation: fade 1.4s ease-out 1.8s forwards; }
+  .roll { animation: roll 14s linear -3s infinite; }
+  .credits { opacity: 0; animation: fade 1.2s ease-out 2.2s forwards; }
+  .shine { animation: shine 7s ease-in-out 3s infinite both; }
+  @keyframes fade { to { opacity: 1; } }
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  @keyframes roll { from { transform: translateY(144px); } to { transform: translateY(-130px); } }
+  @keyframes shine { 0% { transform: translateX(-200px); } 35%, 100% { transform: translateX(1300px); } }
+</style>
+<defs>
+  <linearGradient id="goldText" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#d6ebf8"/><stop offset="0.45" stop-color="#63bcec"/>
+  <stop offset="0.56" stop-color="#2da5e5"/><stop offset="1" stop-color="#1887c3"/></linearGradient>
+  <clipPath id="frame"><rect width="900" height="500" rx="16"/></clipPath>
+  <clipPath id="tclip"><text x="450" y="226" text-anchor="middle" font-family="'Arial Black', 'Segoe UI Black', 'Helvetica Neue', Impact, Arial, sans-serif" font-size="86" font-weight="900" letter-spacing="1">WILDAN PANJI</text></clipPath>
+  <radialGradient id="warm" cx="50%" cy="46%" r="62%">
+    <stop offset="0" stop-color="#143252"/><stop offset="0.55" stop-color="#121a26"/><stop offset="1" stop-color="#010409"/>
+  </radialGradient>
+  <radialGradient id="vig" cx="50%" cy="50%" r="72%">
+    <stop offset="0.6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.7"/>
+  </radialGradient>
+  <linearGradient id="rollfade" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="0.3" stop-color="#fff"/>
+    <stop offset="0.75" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+  </linearGradient>
+  <mask id="rollmask" maskUnits="userSpaceOnUse" x="0" y="298" width="900" height="144">
+    <rect x="0" y="298" width="900" height="144" fill="url(#rollfade)"/>
+  </mask>
+</defs>
+<g clip-path="url(#frame)">
+  <rect width="900" height="500" fill="url(#warm)"/>
+  <rect width="900" height="500" fill="url(#vig)"/>
+  <text class="cap" x="450" y="92" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12.5" letter-spacing="9" fill="#25a1e4">GITHUB PICTURES PRESENTS</text>
+  <g class="ttl">
+    <text x="458.1" y="234.1" text-anchor="middle" font-family="'Arial Black', 'Segoe UI Black', 'Helvetica Neue', Impact, Arial, sans-serif" font-size="86" font-weight="900" letter-spacing="1" fill="#17202b">WILDAN PANJI</text><text x="457.2" y="233.2" text-anchor="middle" font-family="'Arial Black', 'Segoe UI Black', 'Helvetica Neue', Impact, Arial, sans-serif" font-size="86" font-weight="900" letter-spacing="1" fill="#17202b">WILDAN PANJI</text><text x="456.3" y="232.3" text-anchor="middle" font-family="'Arial Black', 'Segoe UI Black', 'Helvetica Neue', Impact, Arial, sans-serif" font-size="86" font-weight="900" letter-spacing="1" fill="#17202b">WILDAN PANJI</text><text x="455.4" y="231.4" text-anchor="middle" font-family="'Arial Black', 'Segoe UI Black', 'Helvetica Neue', Impact, Arial, sans-serif" font-size="86" font-weight="900" letter-spacing="1" fill="#1f2b3a">WILDAN PANJI</text><text x="454.5" y="230.5" text-anchor="middle" font-family="'Arial Black', 'Segoe UI Black', 'Helvetica Neue', Impact, Arial, sans-serif" font-size="86" font-weight="900" letter-spacing="1" fill="#1f2b3a">WILDAN PANJI</text><text x="453.6" y="229.6" text-anchor="middle" font-family="'Arial Black', 'Segoe UI Black', 'Helvetica Neue', Impact, Arial, sans-serif" font-size="86" font-weight="900" letter-spacing="1" fill="#1f2b3a">WILDAN PANJI</text><text x="452.7" y="228.7" text-anchor="middle" font-family="'Arial Black', 'Segoe UI Black', 'Helvetica Neue', Impact, Arial, sans-serif" font-size="86" font-weight="900" letter-spacing="1" fill="#10587f">WILDAN PANJI</text><text x="451.8" y="227.8" text-anchor="middle" font-family="'Arial Black', 'Segoe UI Black', 'Helvetica Neue', Impact, Arial, sans-serif" font-size="86" font-weight="900" letter-spacing="1" fill="#10587f">WILDAN PANJI</text><text x="450.9" y="226.9" text-anchor="middle" font-family="'Arial Black', 'Segoe UI Black', 'Helvetica Neue', Impact, Arial, sans-serif" font-size="86" font-weight="900" letter-spacing="1" fill="#10587f">WILDAN PANJI</text><text x="450" y="226" text-anchor="middle" font-family="'Arial Black', 'Segoe UI Black', 'Helvetica Neue', Impact, Arial, sans-serif" font-size="86" font-weight="900" letter-spacing="1" fill="url(#goldText)" stroke="#e1f0fa" stroke-opacity="0.35" stroke-width="0.7">WILDAN PANJI</text>
+    <g clip-path="url(#tclip)"><g transform="skewX(-22)"><rect class="shine" x="0" y="80" width="70" height="230" fill="#fff" fill-opacity="0.6"/></g></g>
+  </g>
+  <text class="sub" x="450" y="276" text-anchor="middle" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" letter-spacing="6" fill="#e6edf3">TYPESCRIPT · GO DEVELOPER</text>
+  <g class="credits"><g mask="url(#rollmask)"><g transform="translate(0 298)"><g class="roll"><text x="450" y="22" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="18" fill="#e6edf3"><tspan fill-opacity="0.72">starring </tspan><tspan font-weight="700">TubesKursusInAlpro2</tspan><tspan fill-opacity="0.72"> · ★ 1</tspan></text><text x="450" y="52" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="18" fill="#e6edf3"><tspan fill-opacity="0.72">starring </tspan><tspan font-weight="700">Uang-Papi</tspan><tspan fill-opacity="0.72"> · TypeScript</tspan></text><text x="450" y="82" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="18" fill="#e6edf3"><tspan fill-opacity="0.72">filmed on location in </tspan><tspan font-weight="700">Bandung</tspan><tspan fill-opacity="0.72"></tspan></text><text x="450" y="112" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="18" fill="#e6edf3"><tspan fill-opacity="0.72">a </tspan><tspan font-weight="700">Telkom University</tspan><tspan fill-opacity="0.72"> production</tspan></text></g></g></g></g>
+  <rect width="900" height="40" fill="#000"/>
+  <rect y="448" width="900" height="52" fill="#000"/>
+  <text x="40" y="479" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="11.5" fill="#8d96a0">190 contributions · 11 followers · ★ 1</text>
+  <text x="860" y="479" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="11.5" fill="#8d96a0">github.com/wildanpanjii</text>
+</g>
+<rect x="0.75" y="0.75" width="898.5" height="498.5" rx="15.5" fill="none" stroke="#30363d" stroke-opacity="0.9"/>
+</svg>

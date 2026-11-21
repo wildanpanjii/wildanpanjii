@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="212" viewBox="0 0 440 212" role="img" aria-label="TubesKursusInAlpro2: Final project (Tugas Besar) for Algorithms &amp; Programming 2.">
+<defs>
+  <linearGradient id="aq" x1="0" y1="0" x2="0.9" y2="1">
+    <stop offset="0" stop-color="#1b3a5c"/><stop offset="0.5" stop-color="#16263a"/><stop offset="1" stop-color="#10161e"/>
+  </linearGradient>
+  <radialGradient id="lamp" cx="82%" cy="12%" r="60%">
+    <stop offset="0" stop-color="#56b6ea" stop-opacity="0.28"/><stop offset="1" stop-color="#56b6ea" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<rect x="1" y="1" width="438" height="210" rx="24" fill="url(#aq)"/>
+<rect x="1" y="1" width="438" height="210" rx="24" fill="url(#lamp)" stroke="#56b6ea" stroke-opacity="0.5" stroke-width="1.5"/>
+<path d="M24 17 h128" stroke="#e6edf3" stroke-opacity="0.45" stroke-width="3" stroke-linecap="round"/>
+<text x="28" y="56" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="13" letter-spacing="4" fill="#56b6ea">REEL 01</text>
+<text x="28" y="98" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="19" font-weight="700" fill="#e6edf3">TubesKursusInAlpro2</text>
+<text x="28" y="124" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#e6edf3" fill-opacity="0.86">Final project (Tugas Besar) for</text><text x="28" y="144" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#e6edf3" fill-opacity="0.86">Algorithms &amp; Programming 2.</text>
+<rect x="268" y="88" width="148" height="84" rx="8" fill="#0d1117" stroke="#56b6ea" stroke-opacity="0.35"/><rect x="268" y="88" width="148" height="14" rx="8" fill="#161b22"/><rect x="268" y="96" width="148" height="6" fill="#161b22"/><circle cx="277" cy="95" r="2.2" fill="#56b6ea" fill-opacity="0.9"/><circle cx="285" cy="95" r="2.2" fill="#56b6ea" fill-opacity="0.65"/><circle cx="293" cy="95" r="2.2" fill="#56b6ea" fill-opacity="0.4"/><text x="277" y="117" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="8" fill="#56b6ea">$</text><rect x="287" y="112" width="82" height="4" rx="2" fill="#e6edf3" fill-opacity="0.25"/><text x="277" y="128" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="8" fill="#56b6ea">$</text><rect x="287" y="123" width="56" height="4" rx="2" fill="#e6edf3" fill-opacity="0.37"/><text x="277" y="139" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="8" fill="#56b6ea">$</text><rect x="287" y="134" width="75" height="4" rx="2" fill="#e6edf3" fill-opacity="0.49"/><text x="277" y="150" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="8" fill="#56b6ea">$</text><rect x="287" y="145" width="54" height="4" rx="2" fill="#e6edf3" fill-opacity="0.25"/><text x="277" y="161" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="8" fill="#56b6ea">$</text><rect x="287" y="156" width="64" height="4" rx="2" fill="#e6edf3" fill-opacity="0.37"/>
+<text x="28" y="190" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="13" fill="#e6edf3">★ 1</text>
+<g transform="translate(86 179)" stroke="#e6edf3" stroke-width="1.4" fill="none" stroke-linecap="round">
+  <path d="M2 3 v2.5 q0 3 4 3 q4 0 4 -3 v-2.5 M6 8.5 v3"/><circle cx="2" cy="1.5" r="1.5"/><circle cx="10" cy="1.5" r="1.5"/><circle cx="6" cy="13" r="1.5"/>
+</g>
+<text x="104" y="190" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="13" fill="#e6edf3">0</text>
+<rect x="138" y="176" width="20" height="19" rx="4" fill="#56b6ea"/>
+<text x="148" y="189.5" text-anchor="middle" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" font-weight="800" fill="#010409">GO</text>
+<text x="166" y="190" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="13" fill="#e6edf3">Go</text>
+</svg>
